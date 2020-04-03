@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title><%= webpackConfig.name %></title>
+    <style>
+      html::-webkit-scrollbar {
+        width: 10px;
+        height: 1px;
+      }
+
+      html::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        background: #535353;
+      }
+
+      html::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        background: #ededed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
