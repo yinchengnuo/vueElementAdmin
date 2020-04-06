@@ -8,7 +8,7 @@
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <svg-icon icon-class="用户名" />
         </span>
         <el-input
           ref="username"
@@ -24,7 +24,7 @@
       <el-tooltip v-model="capsTooltip" content="键盘大写锁定已打开" placement="right" manual>
         <el-form-item prop="password">
           <span class="svg-container">
-            <svg-icon icon-class="password" />
+            <svg-icon icon-class="密码" />
           </span>
           <el-input
             :key="passwordType"
@@ -40,7 +40,7 @@
             @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? '密码' : '明文'" />
+            <svg-icon :icon-class="passwordType === 'password' ? '显示密码' : '隐藏密码'" />
           </span>
         </el-form-item>
       </el-tooltip>

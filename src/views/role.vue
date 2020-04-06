@@ -77,16 +77,20 @@
             :data="routes"
             :props="defaultProps"
             show-checkbox
+            accordion
+            indent="48"
+            icon-class＝“icon-class”
+            highlight-current
             node-key="path"
             class="permission-tree"
           />
         </el-form-item>
-        <el-form-item label="按钮权限">
+        <!-- <el-form-item label="按钮权限">
           <el-checkbox v-model="BP1">/上传管理[上传成功] / 调整数据 按钮</el-checkbox>
           <el-checkbox v-model="BP2">/报名管理 / 退款 按钮</el-checkbox>
           <el-checkbox v-model="BP3">/报名管理 / 取消比赛资格 按钮</el-checkbox>
           <el-checkbox v-model="BP4">/兑换管理 / 清除兑换记录 按钮</el-checkbox>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div style="text-align:right;">
         <el-button type="danger" @click="dialogVisibleRole=false">取消</el-button>
@@ -405,6 +409,9 @@ export default {
 <style lang="scss">
 .app-container {
   display: flex;
+  .icon-class {
+    color: red;
+  }
   .left {
     flex: 1;
     padding-right: 20px;

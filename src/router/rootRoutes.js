@@ -7,7 +7,7 @@ export default [
     redirect: '/root/index',
     name: 'root',
     alwaysShow: true,
-    meta: { title: 'ROOT', icon: 'root' },
+    meta: { title: 'ROOT', icon: '超级管理员' },
     children: [
       {
         path: 'index',

@@ -12,48 +12,45 @@ export const asyncRoutes = [ // 异步加载路由
     component: Layout,
     redirect: '/nested/menu1/menu1-1',
     name: 'Nested',
-    meta: {
-      title: '路由嵌套',
-      icon: '路由嵌套'
-    },
+    meta: { title: '路由嵌套', icon: '路由嵌套' },
     children: [
       {
         path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
+        component: () => import('@/views/Nested/menu1/index'),
         name: 'Menu1',
-        meta: { title: 'Menu 1', icon: '路由嵌套' },
+        meta: { title: '菜单 1', icon: '路由嵌套' },
         redirect: '/nested/menu1/menu1-1',
         children: [
           {
             path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
+            component: () => import('@/views/Nested/menu1/menu1-1'),
             name: 'Menu1-1',
-            meta: { title: 'Menu 1-1', icon: '路由嵌套' }
+            meta: { title: '菜单 1-1', icon: '路由嵌套' }
           },
           {
             path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
+            component: () => import('@/views/Nested/menu1/menu1-2'),
             name: 'Menu1-2',
             redirect: '/nested/menu1/menu1-2/menu1-2-1',
-            meta: { title: 'Menu 1-2', icon: '路由嵌套' },
+            meta: { title: '菜单 1-2', icon: '路由嵌套' },
             children: [
               {
                 path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                component: () => import('@/views/Nested/menu1/menu1-2/menu1-2-1'),
                 name: 'Menu1-2-1',
-                meta: { title: 'Menu 1-2-1', icon: '路由嵌套' }
+                meta: { title: '菜单 1-2-1', icon: '路由嵌套' }
               },
               {
                 path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                component: () => import('@/views/Nested/menu1/menu1-2/menu1-2-2'),
                 name: 'Menu1-2-2',
-                meta: { title: 'Menu 1-2-2', icon: '路由嵌套' }
+                meta: { title: '菜单 1-2-2', icon: '路由嵌套' }
               }
             ]
           },
           {
             path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
+            component: () => import('@/views/Nested/menu1/menu1-3'),
             name: 'Menu1-3',
             meta: { title: 'Menu 1-3', icon: '路由嵌套' }
           }
@@ -62,8 +59,29 @@ export const asyncRoutes = [ // 异步加载路由
       {
         path: 'menu2',
         name: 'Menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'Menu 2', icon: '路由嵌套' }
+        component: () => import('@/views/Nested/menu2/index'),
+        meta: { title: '菜单 2', icon: '路由嵌套' }
+      }
+    ]
+  },
+  {
+    path: '/admin-namage',
+    component: Layout,
+    redirect: '/nested/menu1/menu1-1',
+    name: 'AdminManage',
+    meta: { title: '后台管理', icon: '后台管理' },
+    children: [
+      {
+        path: 'role-manage',
+        component: () => import('@/views/NestedAdminManage/PageRoleManage'),
+        name: 'PageRoleManage',
+        meta: { title: '角色管理', icon: '角色管理' }
+      },
+      {
+        path: 'account-manage',
+        name: 'PageAccountManage',
+        component: () => import('@/views/NestedAdminManage/PageAccountManage'),
+        meta: { title: '账号管理', icon: '账号管理' }
       }
     ]
   },
