@@ -1,10 +1,10 @@
 <template>
-  <div class="new">新页面</div>
+  <div class="page-query-search">多条件查询</div>
 </template>
 
 <script>
 export default {
-  name: 'New',
+  name: 'PageQuerySearch',
   props: {},
   data() {
     return {}
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .new {
+  .page-query-search {
     padding: 8px;
     box-sizing: border-box;
   }

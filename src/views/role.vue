@@ -18,10 +18,10 @@
             {{ scope.row.role }}
           </template>
         </el-table-column>
-        <el-table-column align="center" label="操作" width="240">
+        <el-table-column align="center" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" size="small" @click="handleEditUser(scope)">修改用户信息</el-button>
-            <el-button type="danger" size="small" @click="handleDeleteUser(scope)">删除用户</el-button>
+            <el-button type="primary" @click="handleEditUser(scope)">修改用户信息</el-button>
+            <el-button type="danger" @click="handleDeleteUser(scope)">删除用户</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -78,19 +78,13 @@
             :props="defaultProps"
             show-checkbox
             accordion
-            indent="48"
-            icon-class＝“icon-class”
+            :indent="48"
+            icon-class="el-icon-arrow-right"
             highlight-current
             node-key="path"
             class="permission-tree"
           />
         </el-form-item>
-        <!-- <el-form-item label="按钮权限">
-          <el-checkbox v-model="BP1">/上传管理[上传成功] / 调整数据 按钮</el-checkbox>
-          <el-checkbox v-model="BP2">/报名管理 / 退款 按钮</el-checkbox>
-          <el-checkbox v-model="BP3">/报名管理 / 取消比赛资格 按钮</el-checkbox>
-          <el-checkbox v-model="BP4">/兑换管理 / 清除兑换记录 按钮</el-checkbox>
-        </el-form-item> -->
       </el-form>
       <div style="text-align:right;">
         <el-button type="danger" @click="dialogVisibleRole=false">取消</el-button>

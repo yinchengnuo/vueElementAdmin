@@ -19,12 +19,12 @@ module.exports = {
     },
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'https://api.admin.jiuweiyun.cn/api',
+        // target: 'https://api.admin.jiuweiyun.cn/api',
         // target: 'http://114.116.235.40/api',
         // target: 'http://dwbs.dake.club/api',
         // target: 'http://api.admin.dake.club/api',
         // target: 'https://yinchengnuo.com/admin',
-        // target: 'http://192.168.0.14/api',
+        target: 'http://192.168.0.13/admin',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { MessageBox } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -20,19 +20,7 @@ service.interceptors.request.use(config => { // 请求拦截器
 
 service.interceptors.response.use(response => { // 响应拦截器
   const { data: res } = response
-  if (res.code !== 200) {
-    if (res.code === 100) {
-      Message({
-        message: '用户名或密码错误',
-        duration: 3 * 1000,
-        type: 'error'
-      })
-    } else {
-      return res
-    }
-  } else {
-    return res
-  }
+  return res
 }, error => {
   if (error.message.includes('401')) {
     MessageBox.confirm('请重新登录', '登录信息过期', {

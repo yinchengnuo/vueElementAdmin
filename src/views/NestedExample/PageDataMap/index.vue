@@ -1,10 +1,10 @@
 <template>
-  <div class="new">新页面</div>
+  <div class="page-data-map">数据地图</div>
 </template>
 
 <script>
 export default {
-  name: 'New',
+  name: 'PageDataMap',
   props: {},
   data() {
     return {}
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .new {
+  .page-data-map {
     padding: 8px;
     box-sizing: border-box;
   }

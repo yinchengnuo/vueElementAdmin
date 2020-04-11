@@ -3,8 +3,9 @@ import Layout from '@/layout'
 export default [ // 所有的默认公有路由
   {
     path: '/',
-    component: Layout,
     redirect: '/',
+    component: Layout,
+    hidden: true,
     children: [
       {
         path: '/',

@@ -345,18 +345,7 @@ export function removeClass(ele, cls) {
 
 // 数字转汉字方法
 export const numberToChinese = num => {
-  const chnNumChar = [
-    '零',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-    '七',
-    '八',
-    '九'
-  ]
+  const chnNumChar = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
   const chnUnitSection = ['', '万', '亿', '万亿', '亿亿']
   const chnUnitChar = ['', '十', '百', '千']
   const numToChn = num => {
@@ -426,4 +415,3 @@ export const numberToChinese = num => {
   }
   return result
 }
-

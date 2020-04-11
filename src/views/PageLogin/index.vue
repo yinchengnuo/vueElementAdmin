@@ -102,7 +102,7 @@ export default {
         if (valid) {
           this.loading = true // 登录 button 显示 loading
           this.$store.dispatch('user/login', this.loginForm) // 登录
-            .then(() => { // 登录成功后，跳转到 this.redirect || '/'
+            .then(() => { // 登录成功后 '/'
               this.$router.replace({ path: '/' })
               this.loading = false
             })

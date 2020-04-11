@@ -20,6 +20,17 @@ Object.keys(filters).forEach(key => { // 挂载全局过滤器
   Vue.filter(key, filters[key])
 })
 
+// 注册全局自定义按钮权控指令 `v-permission`
+Vue.directive('button-permission', {
+  bind: (el, { arg }, { context: { $route: { meta }}}) => {
+    // if (meta.buttonPermission && arg && meta.buttonPermission[arg]) {
+    //   if (!meta.buttonPermission[arg].permission) {
+    //     el.remove()
+    //   }
+    // }
+  }
+})
+
 Vue.config.productionTip = false
 
 new Vue({

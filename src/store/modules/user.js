@@ -1,11 +1,13 @@
+import { resetRouter } from '@/router'
+import { Message } from 'element-ui'
 import { api_Login, api_GetUserInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
 
 const state = {
   name: '',
+  role: '',
   avatar: '',
-  routes: [],
+  routes: null,
   token: getToken()
 
 }
@@ -16,6 +18,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => { // 设置 name
     state.name = name
+  },
+  SET_ROLE: (state, role) => { // 设置 role
+    state.role = role
   },
   SET_AVATAR: (state, avatar) => { // 设置头像
     state.avatar = avatar
@@ -29,10 +34,15 @@ const actions = {
   login({ commit }, userInfo) { // 登录
     const { username, password } = userInfo // 获取用户名和密码
     return new Promise((resolve, reject) => {
-      api_Login({ username, password }).then(({ data }) => { // 发送网络请求
-        commit('SET_TOKEN', data.token) // 将 token 放入 vueX
-        setToken(data.token) // 将 token 存在 cookie
-        resolve()
+      api_Login({ username, password }).then(({ code, data }) => { // 发送网络请求
+        if (code === 200) {
+          commit('SET_TOKEN', data.token) // 将 token 放入 vueX
+          setToken(data.token) // 将 token 存在 cookie
+          resolve()
+        } else {
+          Message.error('用户名或者密码错误')
+          reject('用户名或者密码错误')
+        }
       }).catch(error => {
         reject(error)
       })
@@ -42,8 +52,9 @@ const actions = {
     return new Promise((resolve, reject) => {
       api_GetUserInfo().then(({ data }) => { // 获取用户基本信息和路由信息
         commit('SET_NAME', data.name) // 添加用户名至 vueX
+        commit('SET_ROLE', data.role) // 添加角色名名至 vueX
         commit('SET_AVATAR', data.avatar) // 添加用户头像至 vueX
-        commit('SET_ROUTES', JSON.parse(data.routes)) // 添加路由表至 vueX
+        commit('SET_ROUTES', data.routes) // 添加路由表至 vueX
         resolve(state.routes) // 将路由表传出
       }).catch(error => reject(error))
     })

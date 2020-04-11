@@ -65,9 +65,40 @@ export const asyncRoutes = [ // 异步加载路由
     ]
   },
   {
-    path: '/admin-namage',
+    path: '/code-example',
     component: Layout,
-    redirect: '/nested/menu1/menu1-1',
+    redirect: '/code-example',
+    name: 'CodeExample',
+    meta: { title: '开发示例', icon: '开发示例' },
+    children: [
+      {
+        path: 'data-map',
+        name: 'PageMap',
+        component: () => import('@/views/NestedExample/PageDataMap'),
+        meta: { title: '数据地图', icon: '中国地图' }
+      },
+      {
+        path: 'query-search',
+        component: () => import('@/views/NestedExample/PageQuerySearch'),
+        name: 'PageQuerySearch',
+        meta: { title: '多条件查询', icon: '多条件查询' }
+      },
+      {
+        path: 'button-permission',
+        component: () => import('@/views/NestedExample/PageButtonPermission'),
+        name: 'PageButtonPermission',
+        meta: { title: '按钮权限', icon: '按钮权限', buttonPermission: [
+          { id: 'search', name: '搜索', permission: true },
+          { id: 'add', name: '添加', permission: true },
+          { id: 'del', name: '删除', permission: true }
+        ] }
+      }
+    ]
+  },
+  {
+    path: '/admin-manage',
+    component: Layout,
+    redirect: '/admin-manage/role-manage',
     name: 'AdminManage',
     meta: { title: '后台管理', icon: '后台管理' },
     children: [

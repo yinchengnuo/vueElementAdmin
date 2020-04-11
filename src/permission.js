@@ -14,7 +14,7 @@ router.beforeEach(async(to, from, next) => { // 全局导航守卫
     if (to.path === '/login') { // 如果 to.path 为 login 页面，则跳转到本页
       next({ path: '/' })
     } else { // 如果 to.path 为其他页面，则进行下一步判断
-      if (store.getters.routes && store.getters.routes.length > 0) { // 如果 vueX 中有路由表
+      if (store.getters.routes) { // 如果 vueX 中有路由表
         next() // 直接进入该页面
       } else { // vueX 中没有路由表，表示用户刷新了页面，这时要重新获取路由表
         try {
