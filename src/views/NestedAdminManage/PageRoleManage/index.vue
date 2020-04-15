@@ -2,9 +2,7 @@
   <div class="page-role-manage">
     <el-button type="primary" style="margin-bottom: 8px;" @click="handleAddRole">添加角色</el-button>
     <el-table :data="list" border>
-      <el-table-column align="center" width="234" label="角色名">
-        <template slot-scope="scope">{{ scope.row.name }}</template>
-      </el-table-column>
+      <el-table-column align="center" width="234" prop="name" label="角色名" />
       <el-table-column align="center" label="权限">
         <template slot-scope="scope">
           <el-tag v-for="(value, index) in scope.row.title" :key="index" style="margin: 2px;">{{ value }}</el-tag>
@@ -12,8 +10,8 @@
       </el-table-column>
       <el-table-column wi align="center" width="234" label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="handleEditRole(scope)">编辑角色权限</el-button>
-          <el-button type="danger" size="small" @click="handleDeleteRole(scope)">删除角色</el-button>
+          <el-button type="primary" size="small" @click="handleEditRole(scope.row)">编辑角色权限</el-button>
+          <el-button type="danger" size="small" @click="handleDeleteRole(scope.row)">删除角色</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -53,7 +51,7 @@
         </div>
       </el-form>
       <div style="text-align:right;">
-        <el-button type="danger" @click="dialogVisible=false">取消</el-button>
+        <el-button type="danger" @click="handleCloseDialog">取消</el-button>
         <el-button type="primary" @click="confirmRole">确定</el-button>
       </div>
     </el-dialog>
@@ -69,11 +67,7 @@ export default {
   name: 'PageRoleManage',
   data() {
     return {
-      role: {
-        id: '',
-        name: '',
-        routes: []
-      },
+      role: { id: '', name: '', routes: [] },
       list: [],
       dialogType: '',
       dialogVisible: false,
@@ -82,46 +76,47 @@ export default {
     }
   },
   mounted() {
-    this._loading = this.$loading() // 显示 loading
     this.getRole() // 获取所有角色
   },
   methods: {
     getRole() { // 获取角色方法
-      api_getRole().then(res => { // 发起获取角色列表网络请求
-        this._loading.close()
-        const list = []
-        res.data.list.forEach(e => { // 获取权限预览标题
+      this.$request(api_getRole(), ({ list }) => {
+        list.forEach(e => {
           e.title = JSON.stringify(e.routes).match(/(?<=title":").+?(?=")/g)
-          if (this.$store.state.user.role === 'root') { // root 不显示 root
-            if (e.name !== 'root') {
-              list.push(e)
-            }
-          } else if (this.$store.state.user.role === 'admin') { // 管理员不显示自己和 root
-            if (e.name !== 'root' || e.name !== 'admin') {
-              list.push(e)
-            }
-          } else {
-            list.push(e)
-          }
         })
-        this.list = list
-      }).finally(() => this._loading.close())
+        if (this.$store.state.user.role === 'root') {
+          this.list = list.filter(e => e.name !== 'root')
+        } else if (JSON.stringify(this.$store.state.user.routes).match('后台管理')) {
+          this.list = list.filter(e => JSON.stringify(e.routes).match('后台管理') === null && e.name !== 'root')
+        } else {
+          this.list = list
+        }
+      })
     },
     handleAddRole() { // 点击添加角色
-      this.role = Object.assign({}, {
-        id: '',
-        name: '',
-        routes: []
-      }) // 将弹出框中的用户信息置为空
+      this.role = Object.assign({}, { id: '', name: '', routes: [] }) // 将弹出框中的用户信息置为空
       this.dialogType = 'add' // 弹出框类型为添加用户
       this.$nextTick(() => { // nextTick是为了在弹出框首次打开之后再获取权限Tree
         this.$refs.tree.setCheckedNodes([]) // 清除已选中的权限Tree
       })
       this.dialogVisible = true // 弹出框
     },
-    handleEditRole(scope) { // 点击编辑角色
+    handleEditRole(row) { // 点击编辑角色
       this.dialogType = 'edit' // 弹出框类型为编辑用户
-      this.role = deepClone(scope.row) // 弹出框中的用户信息为当前行的用户信息，deepclone 之后权限Tree和用户信息互不干扰
+      this.role = deepClone(row) // 弹出框中的用户信息为当前行的用户信息，deepclone 之后权限Tree和用户信息互不干扰
+      const mergeMetas = (origin, target) => {
+        origin.forEach(o => {
+          target.forEach(t => {
+            if (o.meta && t.meta && o.name === t.name) {
+              o.meta = t.meta
+            }
+            if (o.children && t.children) {
+              mergeMetas(o.children, t.children)
+            }
+          })
+        })
+      }
+      mergeMetas(this.routes, this.role.routes)
       this.dialogVisible = true // 弹出框
       this.$nextTick(() => { // nextTick是为了在弹出框首次打开之后再获取权限Tree
         const treeChecked = this.generateArr(this.generateRoutes(this.role.routes))
@@ -133,57 +128,42 @@ export default {
         this.$refs.tree.setCheckedNodes(treeChecked) // 将权限Tree的选中项设置为角色的路由项
       })
     },
+    handleCloseDialog() {
+      this.dialogVisible = false
+      this.buttonPermission = null
+      this.routes = this.generateRoutes(deepClone(this.$store.state.permission.routes))
+    },
     confirmRole() { // 点击提交添加/修改角色
+      if (!this.role.name) { // 检测是否填写角色名
+        this.$message.info({ message: '请设置角色名' })
+        return
+      }
       const checkedKeys = this.$refs.tree.getCheckedKeys() // 获取权限 Tree 中已选中的部分
       this.role.routes = this.generateTree(deepClone(this.$store.state.permission.routes), '/', checkedKeys) // 根据已选中的部分格式化路由表
       this.role.routes.forEach(e => { // 删除序列化后无效的路由信息
         e.component ? e.component = '' : ''
       })
       if (this.dialogType === 'edit') { // 如果是编辑角色
-        this._loading = this.$loading()
-        api_updateRole(this.role).then(({ code, message }) => {
-          if (code === 200) {
-            this.$notify.success({ title: '修改成功', message: '角色名: ' + this.role.name })
-            this.dialogVisible = false // 收起弹出框
-            this.getRole() // 修改成功后重新获取下角色列表
-          } else {
-            this.$message.error({ message })
-          }
-        }).catch(e => {
-          this._loading.close()
-          this.$message.error({ message: '修改失败' })
-        })
-      } else if (this.dialogType === 'addR') { // 如果是添加角色
-        if (!this.role.name) { // 检测是否填写角色名
-          this.$message.error({ message: '请设置角色名' })
-          return
-        }
-        this._loading = this.$loading()
-        api_addRole(this.role).then(({ code, message }) => { // 发送网络请求
-          if (code === 200) {
-            this.$notify.success({ title: '添加成功', message: '角色名: ' + this.role.name })
-            this.getRole() // 添加成功后重新获取下角色列表
-            this.dialogVisible = false // 收起弹出框
-          } else {
-            this.$message.error(message)
-          }
-        }).catch(e => {
-          this._loading.close()
-          this.$message.error('添加失败')
-        })
+        this.$request(api_updateRole(this.role), data => {
+          this.$notify.success({ title: '修改成功', message: '角色名: ' + this.role.name })
+          this.getRole() // 添加成功后重新获取下角色列表
+          this.dialogVisible = false // 收起弹出框
+        }, { endStillLoading: true })
+      } else if (this.dialogType === 'add') { // 如果是添加角色
+        this.$request(api_addRole(this.role), data => {
+          this.$notify.success({ title: '添加成功', message: '角色名: ' + this.role.name })
+          this.getRole() // 添加成功后重新获取下角色列表
+          this.dialogVisible = false // 收起弹出框
+        }, { endStillLoading: true })
       }
     },
-    handleDeleteRole({ $index, row }) { // 点击删除角色
+    handleDeleteRole({ id }) { // 点击删除角色
       this.$confirm('确定要删除当前角色？', '确定操作', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' })
-        .then(async() => {
-          this._loading = this.$loading()
-          api_deleteRole({ id: row.id }).then(() => { // 发送网络请求
+        .then(() => {
+          this.$request(api_deleteRole({ id }), data => {
             this.$message.success('删除成功')
             this.getRole() // 删除成功后重新获取下角色列表
-          }).catch(e => {
-            this._loading.close()
-            this.$message.error('删除失败')
-          })
+          }, { endStillLoading: true })
         })
         .catch(err => err)
     },
@@ -203,9 +183,10 @@ export default {
           route = onlyOneShowingChild
         }
         const data = {
-          path: path.resolve(basePath, route.path),
+          name: route.name,
+          meta: route.meta || {},
           title: route.meta && route.meta.title,
-          meta: route.meta || {}
+          path: path.resolve(basePath, route.path)
         }
         if (route.children) {
           data.children = this.generateRoutes(route.children, data.path)
@@ -249,6 +230,7 @@ export default {
           route.children = this.generateTree(route.children, routePath, checkedKeys)
         }
         if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
+          route.meta = this.$refs.tree.getCheckedNodes().find(e => e.name === route.name).meta
           res.push(route)
         }
       }

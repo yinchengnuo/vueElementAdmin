@@ -1,7 +1,3 @@
 <template>
-  <div style="padding:30px;">
-    <el-alert :closable="false" title="menu 1-1" type="success">
-      <router-view />
-    </el-alert>
-  </div>
+  <div style="text-align: center; font-size: 123px; margin-top: 222px;">菜单 1-1</div>
 </template>

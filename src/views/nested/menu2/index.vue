@@ -1,5 +1,3 @@
 <template>
-  <div style="padding:30px;">
-    <el-alert :closable="false" title="menu 2" />
-  </div>
+  <div style="text-align: center; font-size: 123px; margin-top: 222px;">菜单 2</div>
 </template>

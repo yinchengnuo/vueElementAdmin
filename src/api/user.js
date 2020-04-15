@@ -17,7 +17,7 @@ export function api_GetUserInfo() {
 
 export function changepsw(data) {
   return request({
-    url: '/user/changepsw',
+    url: '/user/password',
     method: 'post',
     data
   })

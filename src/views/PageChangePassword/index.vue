@@ -48,17 +48,13 @@ export default {
         this.$message.error({ message: '两次输入的新密码不一致' })
         return
       }
-      changepsw(this.psw).then(async res => {
-        if (res.code === 200) {
-          this.psw.old = this.psw.new = this.psw.newrepeat = ''
+      changepsw(this.psw).then(async({ code, message }) => {
+        if (code === 200) {
           this.$message.success({ message: '修改成功' })
           await this.$store.dispatch('user/logout')
-          this.$router.push('/login')
-        } else if (res.code === 300) {
-          this.psw.old = this.psw.new = this.psw.newrepeat = ''
-          this.$message.error({ message: '旧密码错误' })
+          this.$router.replace('/login')
         } else {
-          this.$message.error({ message: '修改失败' })
+          this.$message.error({ message })
         }
       })
     }

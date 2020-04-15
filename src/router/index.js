@@ -52,7 +52,7 @@ export const asyncRoutes = [ // 异步加载路由
             path: 'menu1-3',
             component: () => import('@/views/Nested/menu1/menu1-3'),
             name: 'Menu1-3',
-            meta: { title: 'Menu 1-3', icon: '路由嵌套' }
+            meta: { title: '菜单 1-3', icon: '路由嵌套' }
           }
         ]
       },
@@ -116,26 +116,14 @@ export const asyncRoutes = [ // 异步加载路由
       }
     ]
   },
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/index',
-    name: 'Permission',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/role'),
-        name: 'RolePermission',
-        meta: { title: '角色管理', icon: 'peoples' }
-      }
-    ]
-  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
+  routes: constantRoutes,
+  mode: 'hash'
+  // mode: 'history'
 })
 
 const router = createRouter()

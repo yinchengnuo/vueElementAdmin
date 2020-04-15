@@ -34,14 +34,14 @@ const actions = {
   login({ commit }, userInfo) { // 登录
     const { username, password } = userInfo // 获取用户名和密码
     return new Promise((resolve, reject) => {
-      api_Login({ username, password }).then(({ code, data }) => { // 发送网络请求
+      api_Login({ username, password }).then(({ code, message, data }) => { // 发送网络请求
         if (code === 200) {
           commit('SET_TOKEN', data.token) // 将 token 放入 vueX
           setToken(data.token) // 将 token 存在 cookie
           resolve()
         } else {
-          Message.error('用户名或者密码错误')
-          reject('用户名或者密码错误')
+          Message.error(message)
+          reject(message)
         }
       }).catch(error => {
         reject(error)
@@ -62,7 +62,7 @@ const actions = {
   logout({ commit, dispatch }) { // 退出登录
     return new Promise((resolve) => {
       commit('SET_TOKEN', '')
-      commit('SET_ROUTES', [])
+      commit('SET_ROUTES', null)
       removeToken()
       resetRouter()
       dispatch('tagsView/delAllViews', null, { root: true })

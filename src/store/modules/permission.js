@@ -17,28 +17,22 @@ export default {
     generateRoutes({ commit, rootState }, routes) { // 格式化路由表
       return new Promise(resolve => {
         let accessedRoutes = [] // 初始路由表
-        if (rootState.user.role === 'root' || rootState.user.role === 'admin') { // 如果用户是 root 或者 admin
-          accessedRoutes = asyncRoutes // 拥有全部路由
-          if (rootState.user.role === 'root') { // 如果是 root 用户
-            accessedRoutes.splice(accessedRoutes.length - 1, 0, ...rootRoutes) // 额外拥有 root 路由
-          }
+        if (rootState.user.role === 'root') { // 如果用户是 root
+          accessedRoutes = [...asyncRoutes, ...rootRoutes] // 拥有所有路由
         } else { // 如果是普通管理员
-          asyncRoutes.forEach(e => {
-            routes.forEach(r => {
-              if (r.name === e.name) {
-                r.component = e.component
-              }
-              if (e.children && r.children) {
-                e.children.forEach(ec => {
-                  r.children.forEach(rc => {
-                    if (ec.name === rc.name) {
-                      rc.component = ec.component
-                    }
-                  })
-                })
-              }
+          const mergeRoutes = (origin, target) => {
+            origin.forEach(o => {
+              target.forEach(t => {
+                if (o.name === t.name) {
+                  t.component = o.component
+                }
+                if (o.children && t.children) {
+                  mergeRoutes(o.children, t.children)
+                }
+              })
             })
-          })
+          }
+          mergeRoutes(asyncRoutes, routes) // 合并路由 component
           routes.push({ path: '*', redirect: '/404', hidden: true })
           accessedRoutes = routes
         }
