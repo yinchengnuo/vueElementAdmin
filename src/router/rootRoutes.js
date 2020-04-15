@@ -7,7 +7,7 @@ export default [
     redirect: '/root/index',
     name: 'root',
     alwaysShow: true,
-    meta: { title: 'ROOT', icon: '超级管理员' },
+    meta: { title: '工具箱', icon: '工具箱' },
     children: [
       {
         path: 'index',
@@ -20,13 +20,11 @@ export default [
         component: () => import('@/views/root/UploadExcel'),
         name: 'UploadExcel',
         meta: { title: '上传Excel', icon: '上传Excel' }
-      },
-      {
-        path: 'repair',
-        component: () => import('@/views/root/ZbsRepair'),
-        name: 'ZbsRepair',
-        meta: { title: '争霸赛维护', icon: '争霸赛维护' }
       }
     ]
+  },
+  {
+    path: 'https://github.com/yinchengnuo/vueElementAdmin',
+    meta: { title: 'GitHub', icon: 'GitHub' }
   }
 ]

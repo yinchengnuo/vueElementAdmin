@@ -24,7 +24,7 @@ module.exports = {
         // target: 'http://dwbs.dake.club/api',
         // target: 'http://api.admin.dake.club/api',
         // target: 'https://yinchengnuo.com/admin',
-        target: 'http://192.168.0.13/admin',
+        target: 'http://192.168.0.11/admin',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''

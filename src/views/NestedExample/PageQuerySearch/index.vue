@@ -1,5 +1,5 @@
 <template>
-  <div class="page-query-search">多条件查询</div>
+  <div style="text-align: center; font-size: 123px; margin-top: 222px;">多条件查询</div>
 </template>
 
 <script>
