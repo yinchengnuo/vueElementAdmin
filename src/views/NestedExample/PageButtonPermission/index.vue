@@ -1,5 +1,5 @@
 <template>
-  <div class="page-button-permission">
+  <div class="PageButtonPermission">
     <span>* 按钮为蓝色即为有权限，灰色即无权限。在实际项目中，大部分情况下，无权限的按钮应该被移出 Dom 树</span>
     <div>
       <el-button v-button-permission:search type="primary">搜索</el-button>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .page-button-permission {
+  .PageButtonPermission {
     padding: 8px;
     display: flex;
     height: 567px;

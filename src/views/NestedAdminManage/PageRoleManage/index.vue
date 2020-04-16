@@ -1,5 +1,5 @@
 <template>
-  <div class="page-role-manage">
+  <div class="PageRoleManage">
     <el-button type="primary" style="margin-bottom: 8px;" @click="handleAddRole">添加角色</el-button>
     <el-table :data="list" border>
       <el-table-column align="center" width="234" prop="name" label="角色名" />
@@ -241,7 +241,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .page-role-manage {
+  .PageRoleManage {
     padding: 8px;
     box-sizing: border-box;
     .el-input {

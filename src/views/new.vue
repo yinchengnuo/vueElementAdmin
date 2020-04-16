@@ -1,5 +1,5 @@
 <template>
-  <div class="new">新页面</div>
+  <div class="New">新页面</div>
 </template>
 
 <script>
@@ -16,8 +16,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .new {
+  .New {
     padding: 8px;
     box-sizing: border-box;
+    height: calc(100vh - 84px);
   }
 </style>

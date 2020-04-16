@@ -38,6 +38,7 @@ const actions = {
         if (code === 200) {
           commit('SET_TOKEN', data.token) // 将 token 放入 vueX
           setToken(data.token) // 将 token 存在 cookie
+          // setInterval(() => localStorage.setItem('login', Date.now()), 567)
           resolve()
         } else {
           Message.error(message)
@@ -66,6 +67,7 @@ const actions = {
       removeToken()
       resetRouter()
       dispatch('tagsView/delAllViews', null, { root: true })
+      localStorage.setItem('login', Date.now())
       resolve()
     })
   }

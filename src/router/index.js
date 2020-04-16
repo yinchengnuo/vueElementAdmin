@@ -121,9 +121,9 @@ export const asyncRoutes = [ // 异步加载路由
 
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
+  base: '/adminVueElement/',
   routes: constantRoutes,
-  mode: 'hash'
-  // mode: 'history'
+  mode: 'history'
 })
 
 const router = createRouter()

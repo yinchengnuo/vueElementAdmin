@@ -1,24 +1,5 @@
 import request from '@/utils/request'
 
-export function api_Login(data) {
-  return request({
-    url: '/user/login',
-    method: 'post',
-    data
-  })
-}
-
-export function api_GetUserInfo() {
-  return request({
-    url: '/user/info',
-    method: 'get'
-  })
-}
-
-export function changepsw(data) {
-  return request({
-    url: '/user/password',
-    method: 'post',
-    data
-  })
-}
+export const api_Login = (data) => request({ url: '/user/login', method: 'post', data })
+export const api_GetUserInfo = () => request({ url: '/user/info', method: 'get' })
+export const changepsw = (data) => request({ url: '/user/password', method: 'post', data })

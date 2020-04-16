@@ -1,5 +1,5 @@
 <template>
-  <div class="page-account-manage">
+  <div class="PageAccountManage">
     <el-button type="primary" style="margin-bottom: 8px;" @click="handleAddAccount">添加账号</el-button>
 
     <el-table :data="list" border>
@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .page-account-manage {
+  .PageAccountManage {
     padding: 8px;
     box-sizing: border-box;
     .el-input {

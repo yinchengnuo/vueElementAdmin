@@ -1,5 +1,5 @@
 <template>
-  <div class="page-data-map">
+  <div class="PageDataMap">
     <div id="china" style="width:100%;height:100%;" />
   </div>
 </template>
@@ -9,6 +9,12 @@ export default {
   name: 'PageDataMap',
   mounted() {
     this.$nextTick(() => this.renderMap())
+    this.timer = setInterval(() => {
+      this.renderMap()
+    }, 3333)
+  },
+  beforeDestroy() {
+    setInterval(this.timer)
   },
   methods: {
     renderMap() {
@@ -55,7 +61,6 @@ export default {
       mockData.forEach((e, i) => {
         if (e.value > max) {
           max = e.value
-          console.log(max)
           maxIndex = i
         }
       })
@@ -67,7 +72,6 @@ export default {
           trigger: 'item',
           alwaysShowContent: true,
           formatter: params => {
-            console.log(params)
             return `
               省份：${params.name} <br />
               排名：${params.seriesIndex + 1} <br />
@@ -115,7 +119,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .page-data-map {
+  .PageDataMap {
     padding: 8px;
     box-sizing: border-box;
     height: calc(100vh - 84px);

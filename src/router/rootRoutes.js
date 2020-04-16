@@ -2,23 +2,22 @@ import Layout from '@/layout'
 
 export default [
   {
-    path: '/root',
+    path: '/tools',
     component: Layout,
-    redirect: '/root/index',
-    name: 'root',
-    alwaysShow: true,
+    name: 'NestedTools',
+    redirect: '/tools/download-excel',
     meta: { title: '工具箱', icon: '工具箱' },
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/root/DownExcel'),
-        name: 'DownExcel',
+        path: 'download-excel',
+        component: () => import('@/views/NestedTools/PageDownloadExcel'),
+        name: 'PageDownloadExcel',
         meta: { title: '下载Excel', icon: '下载Excel' }
       },
       {
-        path: 'upload',
-        component: () => import('@/views/root/UploadExcel'),
-        name: 'UploadExcel',
+        path: 'upload-excel',
+        component: () => import('@/views/NestedTools/PageUploadExcel'),
+        name: 'PageUploadExcel',
         meta: { title: '上传Excel', icon: '上传Excel' }
       }
     ]

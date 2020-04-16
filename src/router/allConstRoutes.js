@@ -22,7 +22,7 @@ export default [ // 所有的默认公有路由
     children: [
       {
         path: '/redirect/:path*',
-        component: () => import('@/views/redirect')
+        component: () => import('@/views/PageRedirect')
       }
     ]
   },
