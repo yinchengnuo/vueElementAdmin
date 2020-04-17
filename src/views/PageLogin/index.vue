@@ -59,8 +59,8 @@ export default {
     return {
       appName: settings.title,
       loginForm: { // 表单数据
-        username: '',
-        password: ''
+        username: '椒麻鸡',
+        password: '123456'
       },
       loginRules: { // 表单校验规则
         username: [{ required: true, trigger: 'change', validator: (rule, value, callback) => value.length > 1 ? callback() : callback(new Error('用户名不能小于2位')) }],
