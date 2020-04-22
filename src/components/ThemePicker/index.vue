@@ -38,7 +38,7 @@ export default {
       console.log(themeCluster, originalCluster)
 
       const $message = this.$message({
-        message: '  Compiling the theme',
+        message: '  主题切换中',
         customClass: 'theme-message',
         type: 'success',
         duration: 0,

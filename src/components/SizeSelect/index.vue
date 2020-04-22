@@ -34,20 +34,13 @@ export default {
       this.$ELEMENT.size = size
       this.$store.dispatch('app/setSize', size)
       this.refreshView()
-      this.$message({
-        message: 'Switch Size Success',
-        type: 'success'
-      })
+      this.$message.success(`字号切换为${this.sizeOptions.find(e => e.value === size).label}`)
     },
     refreshView() {
-      // In order to make the cached page re-rendered
       this.$store.dispatch('tagsView/delAllCachedViews', this.$route)
-
-      const { fullPath } = this.$route
-
       this.$nextTick(() => {
         this.$router.replace({
-          path: '/redirect' + fullPath
+          path: '/redirect' + this.$route.fullPath
         })
       })
     }
