@@ -67,7 +67,7 @@ const actions = {
       removeToken()
       resetRouter()
       dispatch('tagsView/delAllViews', null, { root: true })
-      localStorage.setItem('login', Date.now())
+      localStorage.setItem('LOGOUT', Date.now()) // 触发退出登录事件
       resolve()
     })
   }

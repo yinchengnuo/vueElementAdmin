@@ -7,9 +7,7 @@ import { getToken } from '@/utils/auth' // 从 cookie 获取 token 方法
 import defaultSettings from '@/settings' // 项目默认设置
 NProgress.configure({ showSpinner: false }) // // 进度条配置，不要加载时的圈圈
 
-window.addEventListener('storage', async e => {
-  await location.reload()
-})
+window.addEventListener('storage', ({ key }) => key === 'LOGOUT' && location.reload()) // 监听退出登录事件
 
 router.beforeEach(async(to, from, next) => { // 全局导航守卫
   NProgress.start() // 进度条开始移动
