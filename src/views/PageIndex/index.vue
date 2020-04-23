@@ -24,7 +24,7 @@ export default {
       swiperOptions: {
         speed: 1234,
         effect: 'fade',
-        autoplay: { delay: 3456, disableOnInteraction: false }
+        autoplay: { delay: 5678, disableOnInteraction: false }
       },
       imgs: [
         require('@/assets/index/1.jpg'),
