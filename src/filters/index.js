@@ -52,8 +52,8 @@ export function numberFormatter(num, digits) {
 }
 
 // 数字千位打点
-export function toThousandFilter(num) {
-  return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+export function toThousandFilter(str) {
+  return str.toString().replace(str.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(?:\d{3})+$)/g, '$1,')
 }
 
 // 格式化时间戳

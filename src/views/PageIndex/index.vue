@@ -2,7 +2,9 @@
   <div class="page-index">
     <swiper ref="swiper" class="swiper" :options="swiperOptions">
       <swiper-slide v-for="item in imgs" :key="item">
-        <el-image fit="cover" :src="item" :alt="item" style="width: 100%; height: 100%;" />
+        <el-image fit="cover" :src="item" :alt="item" style="width: 100%; height: 100%;" @load="loading = false">
+          <div slot="placeholder" v-loading="loading" style="height: 100%;" />
+        </el-image>
       </swiper-slide>
     </swiper>
   </div>
@@ -17,10 +19,10 @@ export default {
   directives: {
     swiper: directive
   },
-  props: {},
   data() {
     return {
       height: 0,
+      loading: true,
       swiperOptions: {
         speed: 1234,
         effect: 'fade',
@@ -39,6 +41,29 @@ export default {
   computed: {
     swiper() {
       return this.$refs.swiper.$swiper
+    }
+  },
+  mounted() {
+    this.$event.$on('toggleSideBar', this.toggleSideBar)
+  },
+  beforeDestroy() {
+    clearTimeout(this.timer)
+    this.$event.$off('toggleSideBar')
+    cancelAnimationFrame(this.requestID)
+  },
+  methods: {
+    toggleSideBar() {
+      const animate = () => {
+        this.swiper.update()
+        this.requestID = requestAnimationFrame(animate)
+      }
+      this.requestID = requestAnimationFrame(() => {
+        this.swiper.update()
+        this.requestID = requestAnimationFrame(animate)
+      })
+      this.timer = setTimeout(() => {
+        cancelAnimationFrame(this.requestID)
+      }, 345)
     }
   }
 }

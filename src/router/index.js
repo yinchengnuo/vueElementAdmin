@@ -81,7 +81,13 @@ export const asyncRoutes = [ // 异步加载路由
         path: 'query-search',
         component: () => import('@/views/NestedExample/PageQuerySearch'),
         name: 'PageQuerySearch',
-        meta: { title: '多条件查询', icon: '多条件查询' }
+        meta: { title: '条件查询', icon: '条件查询' }
+      },
+      {
+        path: 'fast-chart',
+        component: () => import('@/views/NestedExample/PageFastChart'),
+        name: 'PageFastChart',
+        meta: { title: '快速图表', icon: '快速图表' }
       },
       {
         path: 'button-permission',
