@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/public.scss';
   .New {
     padding: 8px;
     box-sizing: border-box;

@@ -1,0 +1,11 @@
+@mixin flex($c: row) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: $c;
+}
+
+.el-pagination {
+	margin: 8px;
+  text-align: center;
+}

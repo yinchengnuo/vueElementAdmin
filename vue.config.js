@@ -21,6 +21,7 @@ module.exports = {
       [process.env.VUE_APP_BASE_API]: {
         target: 'https://yinchengnuo.com/admin',
         // target: 'http://192.168.0.11/admin',
+        // target: 'http://192.168.19.230/admin',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
