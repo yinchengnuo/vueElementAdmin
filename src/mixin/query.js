@@ -3,8 +3,12 @@ export default {
     mixin_query: {
       deep: true,
       handler() {
+        this.page = 1
         this.mixin_request()
       }
+    },
+    page() {
+      this.mixin_request()
     }
   },
   mounted() {
@@ -12,7 +16,7 @@ export default {
   },
   methods: {
     mixin_request() {
-      this.$request(this.mixin_func(this.mixin_query), ({ total, list }) => {
+      this.$request(this.mixin_func({ ...this.mixin_query, page: this.page }), ({ total, list }) => {
         this.list = list
         this.total = total
       })

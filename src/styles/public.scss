@@ -9,3 +9,16 @@
 	margin: 8px;
   text-align: center;
 }
+
+.el-table {
+  >>> td {
+    padding: 0;
+    .cell {
+      img {
+        width: 36px;
+        height: 36px;
+        margin-top: 6px;
+      }
+    }
+  }
+}

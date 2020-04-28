@@ -8,7 +8,7 @@
           <el-tag v-for="(value, index) in scope.row.title" :key="index" style="margin: 2px;">{{ value }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column wi align="center" width="234" label="操作">
+      <el-table-column align="center" width="234" label="操作">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="handleEditRole(scope.row)">编辑角色权限</el-button>
           <el-button type="danger" size="small" @click="handleDeleteRole(scope.row)">删除角色</el-button>
