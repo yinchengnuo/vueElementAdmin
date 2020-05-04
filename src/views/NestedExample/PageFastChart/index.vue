@@ -1,24 +1,51 @@
 <template>
-  <div class="PageFastChart">新页面</div>
+  <div class="PageFastChart">
+    <FashChart
+      height="90%"
+      :data="{
+        x: { name: '天', value: list.map(e => `第${e.month}天`) },
+        y: { '儿童款': list.map(e => e.c), '成人款': list.map(e => e.h), '老人款': list.map(e => e.o) }
+      }"
+      title="销售数量对比"
+      unit="件"
+    />
+  </div>
 </template>
 
 <script>
+import FashChart from '@/components/Charts/FashChart'
 export default {
   name: 'PageFastChart',
-  props: {},
+  components: { FashChart },
   data() {
-    return {}
+    return {
+      list: []
+    }
   },
   created() {},
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.getData()
+    this.timer = setInterval(() => this.getData(), 123)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
+  methods: {
+    getData() {
+      if (this.list.length >= 30) {
+        clearInterval(this.timer)
+        return
+      }
+      const radom = () => Math.floor(Math.random() * 100)
+      this.list.push({ month: this.$options.filters.numToZH(this.list.length + 1), c: radom(), h: radom(), o: radom() })
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/public.scss';
   .PageFastChart {
-    padding: 8px;
-    box-sizing: border-box;
     height: calc(100vh - 84px);
   }
 </style>
