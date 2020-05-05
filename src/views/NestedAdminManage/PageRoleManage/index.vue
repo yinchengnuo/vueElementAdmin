@@ -240,7 +240,7 @@ export default {
           route.children = this.generateTree(route.children, routePath, checkedKeys)
         }
         if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
-          route.meta = this.$refs.tree.getCheckedNodes().find(e => e.name === route.name).meta
+          route.meta = this.$refs.tree.getCheckedNodes().find(e => e.name === route.name) ? this.$refs.tree.getCheckedNodes().find(e => e.name === route.name).meta : []
           res.push(route)
         }
       }
