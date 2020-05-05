@@ -34,7 +34,12 @@
               node-key="path"
               class="permission-tree"
               @node-click="clickTree"
-            />
+            >
+              <span slot-scope="{ node, data: { meta } }" class="custom-tree-node">
+                <span>{{ node.label }}</span>
+                <span v-if="meta.buttonPermission && meta.buttonPermission.length" style="color:red">*</span>
+              </span>
+            </el-tree>
           </el-form-item>
           <el-form-item v-if="buttonPermission" label="按钮权限">
             <el-table :data="buttonPermission" size="mini" :show-header="false" stripe border>
@@ -50,9 +55,14 @@
           </el-form-item>
         </div>
       </el-form>
-      <div style="text-align:right;">
-        <el-button type="danger" @click="handleCloseDialog">取消</el-button>
-        <el-button type="primary" @click="confirmRole">确定</el-button>
+      <div style="display: flex;justify-content: space-between">
+        <div>
+          <span style="color: red">* </span>表示当前页面有权控按钮
+        </div>
+        <div>
+          <el-button type="danger" @click="handleCloseDialog">取消</el-button>
+          <el-button type="primary" @click="confirmRole">确定</el-button>
+        </div>
       </div>
     </el-dialog>
   </div>

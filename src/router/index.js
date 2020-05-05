@@ -112,13 +112,13 @@ export const asyncRoutes = [ // 异步加载路由
         path: 'role-manage',
         component: () => import('@/views/NestedAdminManage/PageRoleManage'),
         name: 'PageRoleManage',
-        meta: { title: '角色管理', icon: '角色管理' }
+        meta: { title: '角色管理', icon: '角色管理', noCache: true }
       },
       {
         path: 'account-manage',
         name: 'PageAccountManage',
         component: () => import('@/views/NestedAdminManage/PageAccountManage'),
-        meta: { title: '账号管理', icon: '账号管理' }
+        meta: { title: '账号管理', icon: '账号管理', noCache: true }
       }
     ]
   },

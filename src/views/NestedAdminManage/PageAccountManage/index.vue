@@ -8,7 +8,7 @@
       <el-table-column align="center" prop="role" label="角色" />
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" @click="handleEditAccount(scope.row)">修改账号信息</el-button>
+          <el-button type="primary" :disabled="scope.row.role === 'root'" @click="handleEditAccount(scope.row)">修改账号信息</el-button>
           <el-button v-if="$store.state.user.role === 'root'" type="danger" :disabled="scope.row.role === 'root'" @click="handleDeleteAccount(scope.row)">删除账号</el-button>
         </template>
       </el-table-column>
@@ -80,25 +80,23 @@ export default {
       if (this.dialogType === 'add') {
         this.$request(api_addAccount(this.account), data => {
           this.$notify.success({ title: '添加成功', message: '账号名: ' + this.account.name })
-          this.getAccountRole() // 添加成功后重新
+          this.getAccountRole() // 添加成功后重新获取
           this.dialogVisible = false // 收起弹出框
         }, { endStillLoading: true })
       } else {
         this.$request(api_updateAccount(this.account), data => {
-          this.$notify.success({ title: '添加成功', message: '账号名: ' + this.account.name })
-          this.getAccountRole() // 添加成功后重新
+          this.$notify.success({ title: '编辑成功', message: '账号名: ' + this.account.name })
+          this.getAccountRole() // 添加成功后重新获取
           this.dialogVisible = false // 收起弹出框
         }, { endStillLoading: true })
       }
     },
     handleDeleteAccount({ id }) { // 点击删除
-      this.$confirm('确定要删除当前账号？', '确定操作', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' })
-        .then(async() => {
-          this.$request(api_deleteAccount({ id }), data => {
-            this.getAccountRole() // 删除成功后重新获取下角色列表
-          }, { endStillLoading: true })
-        })
-        .catch(err => err)
+      this.$confirm('确定要删除当前账号？', '确定操作').then(() => {
+        this.$request(api_deleteAccount({ id }), data => {
+          this.getAccountRole() // 删除成功后重新获取下角色列表
+        }, { endStillLoading: true })
+      }).catch(err => err)
     }
   }
 }
