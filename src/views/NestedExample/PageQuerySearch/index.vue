@@ -20,35 +20,44 @@
       <el-tab-pane v-for="item in type" :key="item" :label="item">
         <el-table :data="list" border stripe>
           <el-table-column type="index" prop="order_num" label="序号" align="center" width="82px" :index="index => mixin_query.size * (page - 1) + index + 1" />
-          <el-table-column prop="order_num" label="订单号" align="center" />
-          <el-table-column prop="time" label="下单时间" align="center" />
-          <el-table-column label="下单渠道" align="center">
+          <el-table-column prop="order_num" label="订单号" align="center" width="140" />
+          <el-table-column prop="time" label="下单时间" align="center" width="160" />
+          <el-table-column label="下单渠道" align="center" width="98">
             <template slot-scope="scope">{{ channel[scope.row.channel].label.split('-')[1] }}</template>
           </el-table-column>
-          <el-table-column label="支付方式" align="center">
+          <el-table-column label="支付方式" align="center" width="98">
             <template slot-scope="scope">{{ pay[scope.row.pay].label.split('-')[1] }}</template>
           </el-table-column>
-          <el-table-column label="地区" align="center">
+          <el-table-column label="地区" align="center" width="98">
             <template slot-scope="scope">{{ area[scope.row.area].label.split('-')[1] }}</template>
           </el-table-column>
-          <el-table-column label="性别" align="center">
+          <el-table-column label="性别" align="center" width="98">
             <template slot-scope="scope">{{ sex[scope.row.sex].label.split('-')[1] }}</template>
           </el-table-column>
-          <el-table-column prop="nickname" label="用户昵称" align="center" />
+          <el-table-column prop="nickname" label="用户昵称" align="center" width="120" />
           <el-table-column label="用户头像" align="center">
             <template slot-scope="scope">
               <img :src="scope.row.avatar" :alt="scope.row.nickname">
             </template>
           </el-table-column>
-          <el-table-column prop="shop" label="商家名称" align="center" />
-          <el-table-column prop="name" label="商品名称" align="center" />
-          <el-table-column prop="num" label="数量/单位" align="center" />
-          <el-table-column prop="price" label="订单价值/元" align="center" />
-          <el-table-column prop="address" label="收货地址" align="center" />
-          <el-table-column prop="remark" label="订单备注" align="center" />
-          <el-table-column align="center" label="操作">
-            <template slot-scope="">
-              <el-button type="primary" size="small">详情</el-button>
+          <el-table-column prop="shop" label="商家名称" align="center" width="160" />
+          <el-table-column prop="name" label="商品名称" align="center" width="140" />
+          <el-table-column prop="num" label="数量/单位" align="center" width="98" />
+          <el-table-column prop="price" label="订单价值/元" align="center" width="98" />
+          <el-table-column prop="address" label="收货地址" align="center" width="240" />
+          <el-table-column prop="remark" label="订单备注" align="center" width="240" />
+          <el-table-column fixed="right" align="center" width="60">
+            <template slot="header">
+              <i class="el-icon-s-operation" style="transform:rotate(90deg)" />
+            </template>
+            <template>
+              <el-popover placement="left" width="60" trigger="hover">
+                <div style="text-align: right; margin: 0">
+                  <el-button size="mini" type="text">取消</el-button>
+                  <el-button type="primary" size="mini">确定</el-button>
+                </div>
+                <i slot="reference" class="el-icon-more cursor" />
+              </el-popover>
             </template>
           </el-table-column>
         </el-table>

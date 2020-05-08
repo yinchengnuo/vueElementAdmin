@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     download() {
-      import('@/vendor/Export2Excel').then(excel => {
+      import('@/utils/Export2Excel').then(excel => {
         excel.export_json_to_excel({
           header: Object.keys(this.list[0]),
           data: this.list.map(listItem => Object.keys(this.list[0]).map(j => listItem[j])),
