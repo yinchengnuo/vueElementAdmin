@@ -21,14 +21,7 @@ export default {
   },
   methods: {
     download() {
-      import('@/utils/Export2Excel').then(excel => {
-        excel.export_json_to_excel({
-          header: Object.keys(this.list[0]),
-          data: this.list.map(listItem => Object.keys(this.list[0]).map(j => listItem[j])),
-          filename: '下载Excel',
-          bookType: 'xlsx'
-        })
-      })
+      this.$excel(this.list, '数据表格')
     }
   }
 }

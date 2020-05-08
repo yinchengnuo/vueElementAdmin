@@ -18,4 +18,16 @@ export default Vue => {
       }).finally(() => (conf && conf.endStillLoading) || this._loading.close())
     }
   }
+
+  Vue.prototype.$excel = function(list, name) {
+    !list.length ? list = [{ '暂无数据': '' }] : ''
+    import('@/utils/Export2Excel').then(excel => {
+      excel.export_json_to_excel({
+        header: Object.keys(list[0]),
+        data: list.map(listItem => Object.keys(list[0]).map(j => listItem[j])),
+        filename: name || '下载Excel',
+        bookType: 'xlsx'
+      })
+    })
+  }
 }
