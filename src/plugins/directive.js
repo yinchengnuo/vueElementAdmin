@@ -25,6 +25,7 @@ export default Vue => {
       input.type = 'file'
       input.accept = '.xlsx, .xls'
       input.onchange = ({ target: { files: [excel] }}) => {
+        if (!excel) return
         const XLSX = require('xlsx')
         const reader = new FileReader()
         reader.onload = async({ target: { result }}) => {
