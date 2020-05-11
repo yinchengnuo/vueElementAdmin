@@ -29,13 +29,13 @@ export default {
     query() {
       if (this.input.trim()) {
         this._loading = this.$loading()
-        axios.get(`https://www.yinchengnuo.com/express?num=${this.input.trim()}`).then(({ data: { data }}) => {
-          if (data.lenth) {
-            this.list = data
+        axios.get(`https://www.yinchengnuo.com/express?num=${this.input.trim()}`).then(({ data: { data: list }}) => {
+          if (list.length) {
+            this.list = list
             this.list[0].size = 'large'
             this.list[0].type = 'primary'
           } else {
-            this.$message.ino('系统繁忙，请重试')
+            this.$message.info('系统繁忙，请重试')
           }
         }).finally(() => this._loading.close())
       }
@@ -55,7 +55,7 @@ export default {
     justify-content: flex-start;
     .search {
       @include flex();
-      margin-top: 120px;
+      margin-top: 96px;
       .el-input {
         width: 240px;
       }
