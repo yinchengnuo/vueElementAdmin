@@ -67,7 +67,7 @@ export const asyncRoutes = [ // 异步加载路由
   {
     path: '/code-example',
     component: Layout,
-    redirect: '/code-example',
+    redirect: '/code-example/data-map',
     name: 'CodeExample',
     meta: { title: '开发示例', icon: '开发示例' },
     children: [
