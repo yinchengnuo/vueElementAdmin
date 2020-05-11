@@ -10,15 +10,7 @@
         <span class="svg-container">
           <svg-icon icon-class="用户名" />
         </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="用户名"
-          name="username"
-          type="text"
-          tabindex="1"
-          autocomplete="on"
-        />
+        <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" autocomplete="on" />
       </el-form-item>
 
       <el-tooltip v-model="capsTooltip" content="键盘大写锁定已打开" placement="right" manual>
@@ -68,11 +60,13 @@ export default {
       },
       passwordType: 'password',
       capsTooltip: false,
-      loading: false
+      loading: false,
+      redirect: ''
     }
   },
   mounted() {
     this.$refs.username.focus()
+    this.redirect = this.$route.query.redirect
   },
   methods: {
     checkCapslock({ shiftKey, key } = {}) { // 在每次输入字母 keyup 的时候检测 Caps Lock 大写锁定是否打开并给出相应的提示
@@ -103,7 +97,7 @@ export default {
           this.loading = true // 登录 button 显示 loading
           this.$store.dispatch('user/login', this.loginForm) // 登录
             .then(() => { // 登录成功后 '/'
-              this.$router.replace({ path: '/' })
+              this.$router.replace({ path: this.redirect || '/' })
               this.loading = false
             })
             .catch(() => {
@@ -134,7 +128,7 @@ $cursor: #fff;
     left: 50%;
     bottom: 12px;
     color: #fff;
-    font-size: 22px;
+    font-size: 12px;
     position: fixed;
     transform: translateX(-50%);
   }

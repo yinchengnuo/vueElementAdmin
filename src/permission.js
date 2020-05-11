@@ -30,7 +30,7 @@ router.beforeEach(async(to, from, next) => { // 全局导航守卫
       }
     }
   } else { // 如果 cookie 中没有 token （即用户未登录）
-    to.path === '/login' ? next() : next('/login') // 如果用户前往的是登录页就进入，如果用户前往的是其他页面，就跳转到登录页
+    to.path === '/login' ? next() : next(`/login?redirect=${to.path}`) // 如果用户前往的是登录页就进入，如果用户前往的是其他页面，就跳转到登录页
   }
 })
 
