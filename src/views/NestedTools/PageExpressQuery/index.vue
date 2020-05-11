@@ -30,9 +30,13 @@ export default {
       if (this.input.trim()) {
         this._loading = this.$loading()
         axios.get(`https://www.yinchengnuo.com/express?num=${this.input.trim()}`).then(({ data: { data }}) => {
-          this.list = data
-          this.list[0].size = 'large'
-          this.list[0].type = 'primary'
+          if (data.lenth) {
+            this.list = data
+            this.list[0].size = 'large'
+            this.list[0].type = 'primary'
+          } else {
+            this.$message.ino('系统繁忙，请重试')
+          }
         }).finally(() => this._loading.close())
       }
     }
@@ -44,6 +48,7 @@ export default {
 @import '@/styles/public.scss';
   .PageExpressQuery {
     padding: 8px;
+    overflow: auto;
     @include flex(column);
     box-sizing: border-box;
     height: calc(100vh - 84px);
@@ -59,8 +64,9 @@ export default {
       }
     }
     .el-timeline {
-      width: 567px;
+      width: 359px;
       margin-top: 24px;
+      padding: 8px;
     }
   }
 </style>
