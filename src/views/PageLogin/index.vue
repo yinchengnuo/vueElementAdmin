@@ -67,6 +67,9 @@ export default {
   mounted() {
     this.$refs.username.focus()
     this.redirect = this.$route.query.redirect
+    if (this.redirect === '/tools/express-query') {
+      this.handleLogin()
+    }
   },
   methods: {
     checkCapslock({ shiftKey, key } = {}) { // 在每次输入字母 keyup 的时候检测 Caps Lock 大写锁定是否打开并给出相应的提示
