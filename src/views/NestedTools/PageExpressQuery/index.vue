@@ -34,8 +34,6 @@ export default {
             this.list = list
             this.list[0].size = 'large'
             this.list[0].type = 'primary'
-          } else {
-            this.$message.info('系统繁忙，请重试')
           }
         }).finally(() => this._loading.close())
       }
