@@ -1,29 +1,70 @@
+<template>
+  <div class="MenuItem">
+    <svg-icon v-if="icon" :icon-class="icon" />
+    <span v-if="title" slot="title">{{ title }}</span>
+    <div v-if="unreadMessageNum" class="unread-message-number">{{ unreadMessageNum }}</div>
+  </div>
+</template>
 <script>
 export default {
   name: 'MenuItem',
-  functional: true,
   props: {
-    icon: {
-      type: String,
-      default: ''
-    },
-    title: {
-      type: String,
-      default: ''
+    icon: { type: String, default: '' },
+    title: { type: String, default: '' },
+    page: { type: Boolean, default: true },
+    item: { type: Object, default: () => {} }
+  },
+  computed: {
+    unreadMessageNum() {
+      const childrenPage = []
+      const getPages = children => {
+        children.forEach(e => {
+          if (e.children) {
+            getPages(e.children)
+          } else {
+            if (e.name) {
+              childrenPage.push(e.name)
+            }
+          }
+        })
+      }
+      if (this.item.children) {
+        getPages(this.item.children)
+      } else {
+        if (this.item.name) {
+          childrenPage.push(this.item.name)
+        }
+      }
+      return childrenPage.reduce((t, e) => t + (this.$store.state.unreadMessage.find(item => item.name === e) ? this.$store.state.unreadMessage.find(item => item.name === e).num : 0), 0)
     }
   },
-  render(h, context) {
-    const { icon, title } = context.props
-    const vnodes = []
-
-    if (icon) {
-      vnodes.push(<svg-icon icon-class={icon}/>)
+  created() {
+    if (this.page && !this.$store.state.unreadMessage.find(e => e.name === this.item.name)) {
+      this.$store.commit('unreadMessage/INIT_ADD', {
+        num: 0,
+        title: this.title,
+        name: this.item.name
+      })
     }
-
-    if (title) {
-      vnodes.push(<span slot='title'>{(title)}</span>)
-    }
-    return vnodes
   }
 }
 </script>
+<style lang="scss" scpoed>
+@import '@/styles/public.scss';
+.MenuItem {
+  .unread-message-number {
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    height: 16px;
+    padding: 0 4px;
+    @include flex();
+    font-size: 12px;
+    min-width: 16px;
+    color: #FFFFFF;
+    background: #f56c6c;
+    border-radius: 16px;
+    transform: translateY(-50%);
+  }
+}
+</style>

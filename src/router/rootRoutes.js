@@ -27,9 +27,5 @@ export default [
         meta: { title: '物流查询', icon: '物流查询' }
       }
     ]
-  },
-  {
-    path: 'https://github.com/yinchengnuo/vueElementAdmin',
-    meta: { title: 'GitHub', icon: 'GitHub' }
   }
 ]

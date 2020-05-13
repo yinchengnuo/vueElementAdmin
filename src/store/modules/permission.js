@@ -33,7 +33,6 @@ export default {
             })
           }
           mergeRoutes(asyncRoutes, routes) // 合并路由 component
-          routes.push({ path: 'https://github.com/yinchengnuo/vueElementAdmin', meta: { title: 'GitHub', icon: 'GitHub' }})
           routes.push({ path: '*', redirect: '/404', hidden: true })
           accessedRoutes = routes
         }

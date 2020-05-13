@@ -25,26 +25,26 @@ export const asyncRoutes = [ // 异步加载路由
             path: 'menu1-1',
             component: () => import('@/views/nested/menu1/menu1-1'),
             name: 'Menu1-1',
-            meta: { title: '菜单 1-1', icon: '路由嵌套' }
+            meta: { title: '菜单1-1', icon: '路由嵌套' }
           },
           {
             path: 'menu1-2',
             component: () => import('@/views/nested/menu1/menu1-2'),
             name: 'Menu1-2',
             redirect: '/nested/menu1/menu1-2/menu1-2-1',
-            meta: { title: '菜单 1-2', icon: '路由嵌套' },
+            meta: { title: '菜单1-2', icon: '路由嵌套' },
             children: [
               {
                 path: 'menu1-2-1',
                 component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
                 name: 'Menu1-2-1',
-                meta: { title: '菜单 1-2-1', icon: '路由嵌套' }
+                meta: { title: '菜单1-2-1' }
               },
               {
                 path: 'menu1-2-2',
                 component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
                 name: 'Menu1-2-2',
-                meta: { title: '菜单 1-2-2', icon: '路由嵌套' }
+                meta: { title: '菜单1-2-2' }
               }
             ]
           },
@@ -52,7 +52,7 @@ export const asyncRoutes = [ // 异步加载路由
             path: 'menu1-3',
             component: () => import('@/views/nested/menu1/menu1-3'),
             name: 'Menu1-3',
-            meta: { title: '菜单 1-3', icon: '路由嵌套' }
+            meta: { title: '菜单1-3', icon: '路由嵌套' }
           }
         ]
       },
@@ -98,6 +98,18 @@ export const asyncRoutes = [ // 异步加载路由
           { id: 'add', name: '添加', permission: true },
           { id: 'del', name: '删除', permission: true }
         ] }
+      },
+      {
+        path: 'unread-message',
+        component: () => import('@/views/NestedExample/PageUnreadMessage'),
+        name: 'PageUnreadMessage',
+        meta: { title: '未读消息', icon: '未读消息' }
+      },
+      {
+        path: 'dynamic-cache',
+        component: () => import('@/views/NestedExample/PageDynamicCache'),
+        name: 'PageDynamicCache',
+        meta: { title: '动态缓存', icon: '动态缓存' }
       }
     ]
   },

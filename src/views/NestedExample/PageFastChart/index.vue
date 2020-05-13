@@ -25,7 +25,7 @@ export default {
   created() {},
   mounted() {
     this.getData()
-    this.timer = setInterval(() => this.getData(), 123)
+    this.timer = setInterval(() => this.getData(), document.body.offsetWidth > 375 ? 123 : 333)
   },
   beforeDestroy() {
     clearInterval(this.timer)
