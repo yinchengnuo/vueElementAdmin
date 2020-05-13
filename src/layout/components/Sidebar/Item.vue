@@ -61,7 +61,7 @@ export default {
     font-size: 12px;
     min-width: 16px;
     color: #FFFFFF;
-    line-height: 13.5px;
+    line-height: 15px;
     text-align: center;
     background: red;
     font-weight: bold;
