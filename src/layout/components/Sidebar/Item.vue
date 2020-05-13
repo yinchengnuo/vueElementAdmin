@@ -2,7 +2,7 @@
   <div class="MenuItem">
     <svg-icon v-if="icon" :icon-class="icon" />
     <span v-if="title" slot="title">{{ title }}</span>
-    <div v-if="unreadMessageNum" class="unread-message-number">{{ unreadMessageNum }}</div>
+    <div v-if="unreadMessageNum" class="unread-message-number">{{ unreadMessageNum > 99 ? '99+' : unreadMessageNum }}</div>
   </div>
 </template>
 <script>
@@ -58,11 +58,13 @@ export default {
     right: 32px;
     height: 16px;
     padding: 0 4px;
-    @include flex();
     font-size: 12px;
     min-width: 16px;
     color: #FFFFFF;
-    background: #f56c6c;
+    line-height: 13.5px;
+    text-align: center;
+    background: red;
+    font-weight: bold;
     border-radius: 16px;
     transform: translateY(-50%);
   }

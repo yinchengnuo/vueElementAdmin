@@ -1,6 +1,7 @@
 <template>
   <div class="PageRoleManage">
     <el-button type="primary" style="margin-bottom: 8px;" @click="handleAddRole">添加角色</el-button>
+    <!-- <el-button type="primary" style="margin-bottom: 8px;" @click="handleAddRole">一键更新系统路由</el-button> -->
     <el-table :data="list" border>
       <el-table-column align="center" width="234" prop="name" label="角色名" />
       <el-table-column align="center" label="权限">
@@ -56,9 +57,7 @@
         </div>
       </el-form>
       <div style="display: flex;justify-content: space-between">
-        <div>
-          <span style="color: red">* </span>表示当前页面有权控按钮
-        </div>
+        <div> <span style="color: red">* </span>表示当前页面有权控按钮</div>
         <div>
           <el-button type="danger" @click="handleCloseDialog">取消</el-button>
           <el-button type="primary" @click="confirmRole">确定</el-button>
