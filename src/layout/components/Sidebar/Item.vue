@@ -1,6 +1,13 @@
 <template>
   <div class="MenuItem">
-    <svg-icon v-if="icon" :icon-class="icon" />
+    <template v-if="page && !opened && !recursion">
+      <el-tooltip class="item" effect="light" :content="title" placement="right">
+        <svg-icon v-if="icon" :icon-class="icon" style="margin-left: 20px;" />
+      </el-tooltip>
+    </template>
+    <template v-else>
+      <svg-icon v-if="icon" :icon-class="icon" style="margin-left: 20px;" />
+    </template>
     <span v-if="title" slot="title">{{ title }}</span>
     <div v-if="unreadMessageNum" class="unread-message-number">{{ unreadMessageNum > 99 ? '99+' : unreadMessageNum }}</div>
   </div>
@@ -12,10 +19,14 @@ export default {
     icon: { type: String, default: '' },
     title: { type: String, default: '' },
     page: { type: Boolean, default: true },
-    item: { type: Object, default: () => {} }
+    item: { type: Object, default: () => {} },
+    recursion: { type: Boolean, default: false }
   },
   computed: {
-    unreadMessageNum() {
+    opened() {
+      return this.$store.state.app.sidebar.opened
+    },
+    unreadMessageNum() { // 未读消息数量
       const childrenPage = []
       const getPages = children => {
         children.forEach(e => {

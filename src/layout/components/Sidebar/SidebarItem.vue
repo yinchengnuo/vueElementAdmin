@@ -3,7 +3,7 @@
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" :item="item" />
+          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" :item="item" :recursion="recursion" />
         </el-menu-item>
       </app-link>
     </template>
@@ -17,6 +17,7 @@
         :key="child.path"
         :is-nest="true"
         :item="child"
+        :recursion="true"
         :base-path="resolvePath(child.path)"
         class="nest-menu"
       />
@@ -39,6 +40,7 @@ export default {
     item: { type: Object, required: true },
     isNest: { type: Boolean, default: false },
     basePath: { type: String, default: '' },
+    recursion: { type: Boolean, default: false },
     children: { type: Array, default: () => [] }
   },
   data() {
