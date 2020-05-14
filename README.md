@@ -1,6 +1,6 @@
 # 后台管理系统
 
-本项目是在 [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/) 的基础上，结合本人工作中的实际需求，对其再次封装以达到多次快速复用的结果。在原有基础上，使用后端存储路由表&前端生成动态路由的形式进行权限控制，以角色管理和账号管理的形式呈现，另实现了每个页面都可进行单独的按钮级别权限控制。
+本项目是在 [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/) 的基础上，结合本人工作中的实际需求，对其再次封装以达到多次快速复用的结果。在原有基础上，使用后端存储路由表&前端生成动态路由的形式进行权限控制，以角色管理和账号管理的形式呈现，另实现了每个页面都可进行单独的按钮级别权限控制。同时对一些常用的功能，如数据大屏、未读消息、动态缓存等做了封装。以达到开箱即用，快速开发。
 
 ## [线上预览](https://yinchengnuo.com/adminVueElement/)
 
