@@ -3,6 +3,9 @@
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="right-menu">
+      <a href="https://github.com/yinchengnuo/vueElementAdmin" target="_blank">
+        <svg-icon icon-class="GitHub" style="width: 46px; height: 46px;" />
+      </a>
       <template v-if="device!=='mobile'">
         <search id="header-search" class="right-menu-item" />
         <screenfull id="screenfull" class="right-menu-item hover-effect" />

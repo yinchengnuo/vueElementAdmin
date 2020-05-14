@@ -28,6 +28,7 @@
 <script>
 import ScrollPane from './ScrollPane'
 import path from 'path'
+import Sortable from 'sortablejs'
 
 export default {
   components: { ScrollPane },
@@ -64,6 +65,7 @@ export default {
   mounted() {
     this.initTags()
     this.addTags()
+    this.$nextTick(() => new Sortable(document.querySelector('.tags-view-item').parentElement), { dragClass: 'sortable-drag' })
   },
   methods: {
     isActive(route) {
@@ -213,6 +215,11 @@ export default {
       font-size: 12px;
       margin-left: 5px;
       margin-top: 4px;
+      &.sortable-drag {
+        font-size: 14px;
+        color: #42b983;
+        font-weight: bolder;
+      }
       &:first-of-type {
         margin-left: 15px;
       }
