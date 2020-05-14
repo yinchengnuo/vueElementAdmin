@@ -2,11 +2,11 @@
   <div class="MenuItem">
     <template v-if="page && !opened && !recursion">
       <el-tooltip class="item" effect="light" :content="title" placement="right">
-        <svg-icon v-if="icon" :icon-class="icon" style="margin-left: 20px;" />
+        <svg-icon v-if="icon" :icon-class="icon" :style="{ marginLeft: opened ? '0px' : '20px' }" />
       </el-tooltip>
     </template>
     <template v-else>
-      <svg-icon v-if="icon" :icon-class="icon" style="margin-left: 20px;" />
+      <svg-icon v-if="icon" :icon-class="icon" :style="{ marginLeft: opened ? '0px' : '20px' }" />
     </template>
     <span v-if="title" slot="title">{{ title }}</span>
     <div v-if="unreadMessageNum" class="unread-message-number">{{ unreadMessageNum > 99 ? '99+' : unreadMessageNum }}</div>
