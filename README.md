@@ -65,3 +65,9 @@ Vue.directive('button-permission', {
 
 ![1](https://github.com/yinchengnuo/vueElementAdmin/blob/master/md/1.png)
 ![2](https://github.com/yinchengnuo/vueElementAdmin/blob/master/md/2.png)
+
+## License
+
+[MIT](https://github.com/PanJiaChen/vue-element-admin/blob/master/LICENSE)
+
+Copyright (c) 2017-present PanJiaChen
