@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout'
+import allRootRoutes from './allRootRoutes'
 import allConstRoutes from './allConstRoutes'
+import allPublicRoutes from './allPublicRoutes'
+export const rootRoutes = allRootRoutes
+export const publicRoutes = allPublicRoutes
 export const constantRoutes = allConstRoutes
 
 Vue.use(Router)
@@ -9,9 +13,10 @@ Vue.use(Router)
 export const asyncRoutes = [ // 异步加载路由
   {
     path: '/nested',
+    name: 'Nested',
+    alwaysShow: true,
     component: Layout,
     redirect: '/nested/menu1/menu1-1',
-    name: 'Nested',
     meta: { title: '路由嵌套', icon: '路由嵌套' },
     children: [
       {
@@ -66,81 +71,110 @@ export const asyncRoutes = [ // 异步加载路由
   },
   {
     path: '/code-example',
+    name: 'CodeExample',
+    alwaysShow: true,
     component: Layout,
     redirect: '/code-example/data-map',
-    name: 'CodeExample',
     meta: { title: '开发示例', icon: '开发示例' },
     children: [
       {
         path: 'data-map',
-        name: 'PageMap',
-        component: () => import('@/views/NestedExample/PageDataMap'),
-        meta: { title: '数据地图', icon: '中国地图' }
+        name: 'PageDataMap',
+        meta: { title: '数据地图', icon: '中国地图' },
+        component: () => import('@/views/NestedExample/PageDataMap')
       },
       {
         path: 'query-search',
-        component: () => import('@/views/NestedExample/PageQuerySearch'),
         name: 'PageQuerySearch',
-        meta: { title: '条件查询', icon: '条件查询' }
+        meta: { title: '条件查询', icon: '条件查询' },
+        component: () => import('@/views/NestedExample/PageQuerySearch')
       },
       {
         path: 'fast-chart',
-        component: () => import('@/views/NestedExample/PageFastChart'),
         name: 'PageFastChart',
-        meta: { title: '快速图表', icon: '快速图表' }
+        meta: { title: '快速图表', icon: '快速图表' },
+        component: () => import('@/views/NestedExample/PageFastChart')
       },
       {
         path: 'button-permission',
-        component: () => import('@/views/NestedExample/PageButtonPermission'),
         name: 'PageButtonPermission',
         meta: { title: '按钮权限', icon: '按钮权限', buttonPermission: [
           { id: 'search', name: '搜索', permission: true },
           { id: 'add', name: '添加', permission: true },
           { id: 'del', name: '删除', permission: true }
-        ] }
+        ] },
+        component: () => import('@/views/NestedExample/PageButtonPermission')
       },
       {
         path: 'unread-message',
-        component: () => import('@/views/NestedExample/PageUnreadMessage'),
         name: 'PageUnreadMessage',
-        meta: { title: '未读消息', icon: '未读消息' }
+        meta: { title: '未读消息', icon: '未读消息' },
+        component: () => import('@/views/NestedExample/PageUnreadMessage')
       },
       {
         path: 'dynamic-cache',
-        component: () => import('@/views/NestedExample/PageDynamicCache'),
         name: 'PageDynamicCache',
-        meta: { title: '动态缓存', icon: '动态缓存' }
+        meta: { title: '动态缓存', icon: '动态缓存' },
+        component: () => import('@/views/NestedExample/PageDynamicCache')
       }
     ]
   },
   {
     path: '/admin-manage',
     component: Layout,
-    redirect: '/admin-manage/role-manage',
+    alwaysShow: true,
     name: 'AdminManage',
+    redirect: '/admin-manage/role-manage',
     meta: { title: '后台管理', icon: '后台管理' },
     children: [
       {
         path: 'role-manage',
-        component: () => import('@/views/NestedAdminManage/PageRoleManage'),
         name: 'PageRoleManage',
-        meta: { title: '角色管理', icon: '角色管理', noCache: true }
+        meta: { title: '角色管理', icon: '角色管理', noCache: true },
+        component: () => import('@/views/NestedAdminManage/PageRoleManage')
       },
       {
         path: 'account-manage',
         name: 'PageAccountManage',
-        component: () => import('@/views/NestedAdminManage/PageAccountManage'),
-        meta: { title: '账号管理', icon: '账号管理', noCache: true }
+        meta: { title: '账号管理', icon: '账号管理', noCache: true },
+        component: () => import('@/views/NestedAdminManage/PageAccountManage')
       }
     ]
   },
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '/tools',
+    component: Layout,
+    alwaysShow: true,
+    name: 'NestedTools',
+    redirect: '/tools/express-query',
+    meta: { title: '工具箱', icon: '工具箱' },
+    children: [
+      {
+        path: 'download-excel',
+        name: 'PageDownloadExcel',
+        meta: { title: '下载Excel', icon: '下载Excel' },
+        component: () => import('@/views/NestedTools/PageDownloadExcel')
+      },
+      {
+        path: 'upload-excel',
+        name: 'PageUploadExcel',
+        meta: { title: '上传Excel', icon: '上传Excel' },
+        component: () => import('@/views/NestedTools/PageUploadExcel')
+      },
+      {
+        path: 'express-query',
+        name: 'PageExpressQuery',
+        meta: { title: '物流查询', icon: '物流查询' },
+        component: () => import('@/views/NestedTools/PageExpressQuery')
+      }
+    ]
+  }
 ]
 
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
   base: '/adminVueElement/',
-  routes: constantRoutes,
+  routes: constantRoutes.concat(publicRoutes),
   mode: 'history'
 })
 

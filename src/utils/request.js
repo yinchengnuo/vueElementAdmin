@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox } from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -20,6 +20,9 @@ service.interceptors.request.use(config => { // 请求拦截器
 
 service.interceptors.response.use(response => { // 响应拦截器
   const { data: res } = response
+  if (res.code !== 200) {
+    Message.error(res.message)
+  }
   return res
 }, error => {
   if (error.message.includes('401')) {

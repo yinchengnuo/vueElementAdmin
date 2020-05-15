@@ -9,6 +9,8 @@ NProgress.configure({ showSpinner: false }) // // 进度条配置，不要加载
 
 window.addEventListener('storage', ({ key }) => key === 'LOGOUT' && location.reload()) // 监听退出登录事件
 
+const whiteList = ['/login', '/auth-redirect', '/realtime-data'] // 路由白名单
+
 router.beforeEach(async(to, from, next) => { // 全局导航守卫
   NProgress.start() // 进度条开始移动
   document.title = to.meta.title ? `${defaultSettings.title}-${to.meta.title}` : `${defaultSettings.title}` // 设置页面title
@@ -30,7 +32,11 @@ router.beforeEach(async(to, from, next) => { // 全局导航守卫
       }
     }
   } else { // 如果 cookie 中没有 token （即用户未登录）
-    to.path === '/login' ? next() : next(`/login?redirect=${to.path}`) // 如果用户前往的是登录页就进入，如果用户前往的是其他页面，就跳转到登录页
+    if (whiteList.indexOf(to.path) !== -1) { // 检查路由是否命中白名单
+      next() // 命中直接跳转
+    } else {
+      next(`/login?redirect=${to.path}`) // 没有命中带着要跳转的页面 path 去登录页
+    }
   }
 })
 

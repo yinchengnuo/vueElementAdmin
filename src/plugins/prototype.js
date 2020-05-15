@@ -10,8 +10,8 @@ export default Vue => {
         fun(res.map(e => e.data || {}))
       }).catch(() => this.$message.error((conf && conf.errorMsg) || '操作失败')).finally(() => (conf && conf.endStillLoading) || this._loading.close())
     } else {
-      api.then(({ code, message, data }) => { // 发送网络请求
-        code === 200 ? fun(data || {}) : this.$message.error(message)
+      api.then(({ code, data }) => { // 发送网络请求
+        code === 200 && fun(data || {})
       }).catch(() => {
         this.$message.error((conf && conf.errorMsg) || '操作失败')
         this._loading.close()

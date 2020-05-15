@@ -1,5 +1,4 @@
-import { asyncRoutes, constantRoutes } from '@/router'
-import rootRoutes from '@/router/rootRoutes'
+import { asyncRoutes, constantRoutes, rootRoutes, publicRoutes } from '@/router'
 
 export default {
   namespaced: true,
@@ -10,11 +9,11 @@ export default {
   mutations: {
     SET_ROUTES: (state, routes) => { // 设置路由表
       state.addRoutes = routes // 将异步路由存储
-      state.routes = constantRoutes.concat(routes) // 设置路由表为 异步路由 + 常量路由，即所有已有的路由
+      state.routes = constantRoutes.concat(publicRoutes).concat(routes) // 设置路由表为 异步路由 + 常量路由，即所有已有的路由
     }
   },
   actions: {
-    generateRoutes({ commit, rootState }, routes) { // 格式化路由表
+    generateRoutes({ state, commit, rootState }, routes) { // 格式化路由表
       return new Promise(resolve => {
         let accessedRoutes = [] // 初始路由表
         if (rootState.user.role === 'root') { // 如果用户是 root
@@ -33,11 +32,12 @@ export default {
             })
           }
           mergeRoutes(asyncRoutes, routes) // 合并路由 component
-          routes.push({ path: 'https://github.com/yinchengnuo/vueElementAdmin', name: 'GitHub', meta: { title: 'GitHub', icon: 'GitHub' }})
-          routes.push({ path: '*', redirect: '/404', hidden: true })
           accessedRoutes = routes
         }
+        accessedRoutes.push({ path: 'https://github.com/yinchengnuo/vueElementAdmin', name: 'GitHub', meta: { title: 'GitHub', icon: 'GitHub' }})
+        accessedRoutes.push({ path: '*', redirect: '/404', hidden: true })
         commit('SET_ROUTES', accessedRoutes)
+        console.log(state.routes)
         resolve(accessedRoutes)
       })
     }

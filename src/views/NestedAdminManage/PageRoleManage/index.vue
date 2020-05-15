@@ -69,6 +69,7 @@
 
 <script>
 import path from 'path'
+import { asyncRoutes } from '@/router'
 import { deepClone } from '../../../utils'
 import { api_getRole, api_addRole, api_deleteRole, api_updateRole } from '@/api/role'
 
@@ -81,7 +82,7 @@ export default {
       dialogType: '',
       dialogVisible: false,
       buttonPermission: null,
-      routes: this.generateRoutes(deepClone(this.$store.state.permission.routes))
+      routes: this.$store.state.user.role === 'root' ? this.generateRoutes(deepClone(asyncRoutes)) : this.generateRoutes(deepClone(this.$store.state.permission.routes))
     }
   },
   mounted() {
@@ -231,7 +232,7 @@ export default {
       })
       return data
     },
-    generateTree(routes, basePath = '/', checkedKeys) {
+    generateTree(routes, basePath = '/', checkedKeys) { // 将前端路由表转换为后端路由表
       const res = []
       for (const route of routes) {
         const routePath = path.resolve(basePath, route.path)
@@ -239,7 +240,7 @@ export default {
           route.children = this.generateTree(route.children, routePath, checkedKeys)
         }
         if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
-          route.meta = this.$refs.tree.getCheckedNodes().find(e => e.name === route.name) ? this.$refs.tree.getCheckedNodes().find(e => e.name === route.name).meta : []
+          route.meta = this.$refs.tree.getCheckedNodes().find(e => e.name === route.name).meta
           res.push(route)
         }
       }
