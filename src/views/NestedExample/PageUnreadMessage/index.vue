@@ -45,9 +45,6 @@ export default {
     .el-table {
       width: 370px;
       flex: 0 0 auto;
-      .el-input-number {
-        margin: 6px 0;
-      }
     }
   }
 </style>

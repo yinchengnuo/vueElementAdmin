@@ -1,10 +1,10 @@
 <template>
-  <div class="New">新页面</div>
+  <div class="NewPage">新页面</div>
 </template>
 
 <script>
 export default {
-  name: 'New',
+  name: 'NewPage',
   props: {},
   data() {
     return {}
@@ -17,7 +17,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/public.scss';
-  .New {
+  .NewPage {
     padding: 8px;
     box-sizing: border-box;
     height: calc(100vh - 84px);

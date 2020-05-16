@@ -62,9 +62,6 @@ export default {
     .el-table {
       width: 370px;
       flex: 0 0 auto;
-      .el-tag {
-        margin: 6px 0;
-      }
     }
   }
 </style>

@@ -23,21 +23,21 @@
           <el-table-column prop="order_num" label="订单号" align="center" width="140" />
           <el-table-column prop="time" label="下单时间" align="center" width="160" />
           <el-table-column label="下单渠道" align="center" width="98">
-            <template slot-scope="scope">{{ channel[scope.row.channel].label.split('-')[1] }}</template>
+            <template #default="scope">{{ channel[scope.row.channel].label.split('-')[1] }}</template>
           </el-table-column>
           <el-table-column label="支付方式" align="center" width="98">
-            <template slot-scope="scope">{{ pay[scope.row.pay].label.split('-')[1] }}</template>
+            <template #default="scope">{{ pay[scope.row.pay].label.split('-')[1] }}</template>
           </el-table-column>
           <el-table-column label="地区" align="center" width="98">
-            <template slot-scope="scope">{{ area[scope.row.area].label.split('-')[1] }}</template>
+            <template #default="scope">{{ area[scope.row.area].label.split('-')[1] }}</template>
           </el-table-column>
           <el-table-column label="性别" align="center" width="98">
-            <template slot-scope="scope">{{ sex[scope.row.sex].label.split('-')[1] }}</template>
+            <template #default="scope">{{ sex[scope.row.sex].label.split('-')[1] }}</template>
           </el-table-column>
           <el-table-column prop="nickname" label="用户昵称" align="center" width="120" />
           <el-table-column label="用户头像" align="center">
-            <template slot-scope="scope">
-              <img :src="scope.row.avatar" :alt="scope.row.nickname">
+            <template #default="{ row: { avatar, nickname } }">
+              <img :src="avatar" :alt="nickname">
             </template>
           </el-table-column>
           <el-table-column prop="shop" label="商家名称" align="center" width="160" />
@@ -47,7 +47,7 @@
           <el-table-column prop="address" label="收货地址" align="center" width="240" />
           <el-table-column prop="remark" label="订单备注" align="center" width="240" />
           <el-table-column fixed="right" align="center" width="60">
-            <template slot="header">
+            <template #header>
               <i class="el-icon-s-operation" style="transform:rotate(90deg)" />
             </template>
             <template>
@@ -63,16 +63,7 @@
         </el-table>
       </el-tab-pane>
     </el-tabs>
-    <el-pagination
-      background
-      :total="total"
-      :current-page="page"
-      :page-sizes="[10, 15, 20]"
-      :page-size="mixin_query.size"
-      layout="total, sizes, prev, pager, next, jumper"
-      @current-change="val => page = val"
-      @size-change="val => mixin_query.size = val"
-    />
+    <el-pagination background :total="total" :current-page="page" :page-sizes="[10, 15, 20]" :page-size="mixin_query.size" @current-change="val => page = val" @size-change="val => mixin_query.size = val" />
   </div>
 </template>
 
@@ -153,10 +144,18 @@ export default {
       }
     }
     .el-table {
-      >>> .cell {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      >>> td {
+        padding: 0;
+        .cell {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          img {
+            width: 36px;
+            height: 36px;
+            margin-top: 6px;
+          }
+        }
       }
     }
   }

@@ -20,6 +20,12 @@ export default [
         name: 'PageIpWhitelist',
         meta: { title: 'IP白名单', icon: 'IP白名单' },
         component: () => import('@/views/NestedRootFunction/PageIpWhitelist')
+      },
+      {
+        path: 'api-test',
+        name: 'PageAPITest',
+        meta: { title: 'API测试', icon: 'API测试' },
+        component: () => import('@/views/NestedRootFunction/PageAPITest')
       }
     ]
   }
