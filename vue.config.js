@@ -1,11 +1,12 @@
 const path = require('path')
+import { publicPath } from '@/router'
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
-  publicPath: '/adminVueElement/',
+  publicPath,
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',

@@ -37,7 +37,6 @@ export default {
         accessedRoutes.push({ path: 'https://github.com/yinchengnuo/vueElementAdmin', name: 'GitHub', meta: { title: 'GitHub', icon: 'GitHub' }})
         accessedRoutes.push({ path: '*', redirect: '/404', hidden: true })
         commit('SET_ROUTES', accessedRoutes)
-        console.log(state.routes)
         resolve(accessedRoutes)
       })
     }

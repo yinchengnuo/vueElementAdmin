@@ -11,21 +11,31 @@
         <div class="bullshit__oops">404/401</div>
         <div class="bullshit__info">当前页面未找到或权限不足</div>
         <div class="bullshit__headline">您可能访问了一个并不存在或者没有权限访问的页面</div>
-        <div class="bullshit__info">请检查你的浏览器URL中#后的hash值，清除#后的内容再重新访问试试！！！</div>
-        <a href="" class="bullshit__return-home">回到首页</a>
+        <div class="bullshit__info">请检查你的浏览器URL，如果有#，清除#后的内容再重新访问试试！！！</div>
+        <a ref="backIndex" :href="publicPath" class="bullshit__return-home">回到首页&nbsp;{{ countDown }}</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+import { publicPath } from '@/router'
 export default {
   name: 'Page404',
-  computed: {
-    message() {
-      return 'The webmaster said that you can not enter this page...'
+  data() {
+    return {
+      publicPath,
+      countDown: 5
     }
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.countDown--
+      if (this.countDown === 0) {
+        clearInterval(this.timer)
+        this.$refs.backIndex.click()
+      }
+    }, 1000)
   }
 }
 </script>

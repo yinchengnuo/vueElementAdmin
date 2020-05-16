@@ -171,14 +171,18 @@ export const asyncRoutes = [ // 异步加载路由
   }
 ]
 
+const base = '/adminVueElement/'
+
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
-  base: '/adminVueElement/',
+  base,
   routes: constantRoutes.concat(publicRoutes),
   mode: 'history'
 })
 
 const router = createRouter()
+
+export const publicPath = base
 
 export function resetRouter() { // 重置路由
   router.matcher = createRouter().matcher
