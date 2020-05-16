@@ -1,6 +1,5 @@
 const path = require('path')
-import { publicPath } from '@/router'
-const defaultSettings = require('./src/settings.js')
+const { title , publicPath } = require('./src/settings.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -30,7 +29,7 @@ module.exports = {
     }
   },
   configureWebpack: {
-    name: defaultSettings.title,
+    name: title,
     resolve: {
       alias: {
         '@': resolve('src')

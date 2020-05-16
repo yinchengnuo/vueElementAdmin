@@ -4,6 +4,7 @@ import Layout from '@/layout'
 import allRootRoutes from './allRootRoutes'
 import allConstRoutes from './allConstRoutes'
 import allPublicRoutes from './allPublicRoutes'
+import { publicPath as base } from '@/settings'
 export const rootRoutes = allRootRoutes
 export const publicRoutes = allPublicRoutes
 export const constantRoutes = allConstRoutes
@@ -171,18 +172,14 @@ export const asyncRoutes = [ // 异步加载路由
   }
 ]
 
-const base = '/adminVueElement/'
-
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
   base,
-  routes: constantRoutes.concat(publicRoutes),
-  mode: 'history'
+  mode: 'history',
+  routes: constantRoutes.concat(publicRoutes)
 })
 
 const router = createRouter()
-
-export const publicPath = base
 
 export function resetRouter() { // 重置路由
   router.matcher = createRouter().matcher
