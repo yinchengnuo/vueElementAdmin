@@ -3,7 +3,7 @@
     <el-table v-show="list.length" max-height="666" :data="list" border stripe>
       <el-table-column v-for="(item, index) in Object.keys(list[0] ? list[0] : {})" :key="index" :prop="item" :label="item" align="center" />
     </el-table>
-    <el-button v-read-excel="upload" type="primary">上传Excel</el-button>
+    <el-button v-excel="upload" type="primary">上传Excel</el-button>
     <div style="margin: 24px; line-height: 2; text-align: center;">
       * 本示例仅适用于将少量数据的 excel 转换为 JSON 数据。
       如果数据量很大，阻塞效果会非常明显。作者尝试过使用 Worker，但是由于 postMessage 不支持传值函数类型。

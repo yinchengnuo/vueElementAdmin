@@ -15,15 +15,17 @@ export default Vue => {
     }
   })
 
-  // 注册全局自定义快速读取 excel `v-read-excel`
-  Vue.directive('read-excel', {
+  // 注册全局自定义快速读取 excel `v-excel`
+  Vue.directive('excel', {
     inserted: (el, { value }) => {
-      const id = Date.now()
+      const id = String(Date.now() + Math.floor(Math.random() * (10 ** 16)))
       const input = document.createElement('input')
-      el['read-excel-id'] = id
+      el['excel-id'] = id
+      el['excel-event'] = () => document.getElementById(id).click()
       input.id = id
       input.type = 'file'
       input.accept = '.xlsx, .xls'
+      input.style.display = 'none'
       input.onchange = ({ target: { files: [excel] }}) => {
         if (!excel) return
         const XLSX = require('xlsx')
@@ -31,13 +33,46 @@ export default Vue => {
         reader.onload = async({ target: { result }}) => {
           const workbook = XLSX.read(result, { type: 'array' })
           value && value(XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]))
+          input.value = ''
         }
         reader.readAsArrayBuffer(excel)
       }
-      input.style.display = 'none'
       document.body.appendChild(input)
-      el.addEventListener('click', () => document.getElementById(id).click())
+      el.addEventListener('click', el['excel-event'])
     },
-    unbind: el => document.getElementById(el['read-excel-id']).remove()
+    unbind: el => {
+      el = document.getElementById(el['excel-id'])
+      el.removeEventListener(el['excel-event'])
+      el.remove()
+    }
+  })
+
+  // 注册全局自定义快速读取 excel `v-img`
+  Vue.directive('img', {
+    inserted: (el, { value }) => {
+      const id = String(Date.now() + Math.floor(Math.random() * (10 ** 16)))
+      const input = document.createElement('input')
+      el['excel-id'] = id
+      el['excel-event'] = () => document.getElementById(id).click()
+      input.id = id
+      input.type = 'file'
+      input.accept = '.jpg, .jpeg, .gif, .png'
+      input.style.display = 'none'
+      el.addEventListener('click', el['excel-event'])
+      input.onchange = ({ target: { files: [img] }}) => {
+        console.log(img)
+        if (!img) return
+        const formDate = new FormData()
+        formDate.append('img', img)
+        value(formDate)
+        input.value = ''
+      }
+      document.body.appendChild(input)
+    },
+    unbind: el => {
+      el = document.getElementById(el['excel-id'])
+      el.removeEventListener(el['excel-event'])
+      el.remove()
+    }
   })
 }

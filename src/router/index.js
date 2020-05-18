@@ -121,28 +121,6 @@ export const asyncRoutes = [ // 异步加载路由
     ]
   },
   {
-    path: '/admin-manage',
-    component: Layout,
-    alwaysShow: true,
-    name: 'AdminManage',
-    redirect: '/admin-manage/role-manage',
-    meta: { title: '后台管理', icon: '后台管理' },
-    children: [
-      {
-        path: 'role-manage',
-        name: 'PageRoleManage',
-        meta: { title: '角色管理', icon: '角色管理', noCache: true },
-        component: () => import('@/views/NestedAdminManage/PageRoleManage')
-      },
-      {
-        path: 'account-manage',
-        name: 'PageAccountManage',
-        meta: { title: '账号管理', icon: '账号管理', noCache: true },
-        component: () => import('@/views/NestedAdminManage/PageAccountManage')
-      }
-    ]
-  },
-  {
     path: '/tools',
     component: Layout,
     alwaysShow: true,
@@ -167,6 +145,34 @@ export const asyncRoutes = [ // 异步加载路由
         name: 'PageExpressQuery',
         meta: { title: '物流查询', icon: '物流查询' },
         component: () => import('@/views/NestedTools/PageExpressQuery')
+      },
+      {
+        path: 'character-recognition',
+        name: 'PageCharacterRecognition',
+        meta: { title: '文字识别', icon: '文字识别' },
+        component: () => import('@/views/NestedTools/PageCharacterRecognition')
+      }
+    ]
+  },
+  {
+    path: '/admin-manage',
+    component: Layout,
+    alwaysShow: true,
+    name: 'AdminManage',
+    redirect: '/admin-manage/role-manage',
+    meta: { title: '后台管理', icon: '后台管理' },
+    children: [
+      {
+        path: 'role-manage',
+        name: 'PageRoleManage',
+        meta: { title: '角色管理', icon: '角色管理', noCache: true },
+        component: () => import('@/views/NestedAdminManage/PageRoleManage')
+      },
+      {
+        path: 'account-manage',
+        name: 'PageAccountManage',
+        meta: { title: '账号管理', icon: '账号管理', noCache: true },
+        component: () => import('@/views/NestedAdminManage/PageAccountManage')
       }
     ]
   }

@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import TestSlot from './components/TestSlot'
+import TestSlot from './components/TestSlot.vue'
 export default {
   name: 'PageAPITest',
   components: { TestSlot },

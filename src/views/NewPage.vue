@@ -1,5 +1,5 @@
 <template>
-  <div class="NewPage">新页面</div>
+  <div class="NewPage">NewPage</div>
 </template>
 
 <script>
