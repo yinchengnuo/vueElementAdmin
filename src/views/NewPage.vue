@@ -20,6 +20,6 @@ export default {
   .NewPage {
     padding: 8px;
     box-sizing: border-box;
-    height: calc(100vh - 84px);
+    min-height: calc(100vh - 84px);
   }
 </style>

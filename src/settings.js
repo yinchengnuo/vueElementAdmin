@@ -6,5 +6,6 @@ module.exports = {
   sidebarLogo: true, // 是否显示侧边栏 Logo
   sidebarLogoURL: 'http://image.tupian114.com/20140522/11384947.png', // 侧边栏顶部logo
   errorLog: 'production', // 错误日志生成环境
-  publicPath: '/adminVueElement/' // 部署跟路由
+  publicPath: '/adminVueElement/', // 部署跟路由
+  routeWhiteList: ['/login', '/auth-redirect', '/public-chart'] // 免登录页面
 }

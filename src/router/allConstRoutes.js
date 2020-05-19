@@ -38,6 +38,19 @@ export default [ // 所有的默认公有路由
     meta: { title: '404' }
   },
   {
+    path: '/public',
+    component: Layout,
+    redirect: '/public/public-page',
+    children: [
+      {
+        path: 'public-page',
+        name: 'PagePublicPage',
+        meta: { title: '公共页面', icon: '公共页面' },
+        component: () => import('@/views/PagePublicPage')
+      }
+    ]
+  },
+  {
     path: '/change-password',
     component: Layout,
     redirect: '/change-password/',

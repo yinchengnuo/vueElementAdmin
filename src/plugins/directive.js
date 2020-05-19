@@ -49,22 +49,32 @@ export default Vue => {
 
   // 注册全局自定义快速读取 excel `v-img`
   Vue.directive('img', {
-    inserted: (el, { value }) => {
+    inserted: (el, { value, arg, modifiers: { formData }}) => {
+      console.log(arg, formData)
+      const max = isNaN(Number(arg)) ? 1 : Number(arg)
       const id = String(Date.now() + Math.floor(Math.random() * (10 ** 16)))
       const input = document.createElement('input')
       el['excel-id'] = id
       el['excel-event'] = () => document.getElementById(id).click()
       input.id = id
       input.type = 'file'
-      input.accept = '.jpg, .jpeg, .gif, .png'
       input.style.display = 'none'
+      input.multiple = max ? 'multiple' : ''
+      input.accept = '.jpg, .jpeg, .gif, .png'
       el.addEventListener('click', el['excel-event'])
-      input.onchange = ({ target: { files: [img] }}) => {
-        console.log(img)
-        if (!img) return
-        const formDate = new FormData()
-        formDate.append('img', img)
-        value(formDate)
+      input.onchange = ({ target: { files }}) => {
+        files = Array.from(files).slice(0, max)
+        if (!files.length) return
+        if (formData) {
+          const formDate = new FormData()
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i]
+            formDate.append('img', file)
+          }
+          value(formDate)
+        } else {
+          value(files)
+        }
         input.value = ''
       }
       document.body.appendChild(input)

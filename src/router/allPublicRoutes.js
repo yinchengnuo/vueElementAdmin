@@ -1,8 +1,8 @@
 export default [
   {
-    path: '/realtime-data',
+    path: '/public-chart',
     hidden: true,
-    meta: { title: '数据实时追踪' },
-    component: () => import('@/views/NestedExample/PageDataMap')
+    meta: { title: '公共页面' },
+    component: () => import('@/views/PublicPages/PagePublicChart')
   }
 ]

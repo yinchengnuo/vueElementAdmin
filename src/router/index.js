@@ -15,7 +15,6 @@ export const asyncRoutes = [ // 异步加载路由
   {
     path: '/nested',
     name: 'Nested',
-    alwaysShow: true,
     component: Layout,
     redirect: '/nested/menu1/menu1-1',
     meta: { title: '路由嵌套', icon: '路由嵌套' },
@@ -73,7 +72,6 @@ export const asyncRoutes = [ // 异步加载路由
   {
     path: '/code-example',
     name: 'CodeExample',
-    alwaysShow: true,
     component: Layout,
     redirect: '/code-example/data-map',
     meta: { title: '开发示例', icon: '开发示例' },
@@ -123,7 +121,6 @@ export const asyncRoutes = [ // 异步加载路由
   {
     path: '/tools',
     component: Layout,
-    alwaysShow: true,
     name: 'NestedTools',
     redirect: '/tools/express-query',
     meta: { title: '工具箱', icon: '工具箱' },
@@ -147,17 +144,16 @@ export const asyncRoutes = [ // 异步加载路由
         component: () => import('@/views/NestedTools/PageExpressQuery')
       },
       {
-        path: 'character-recognition',
-        name: 'PageCharacterRecognition',
-        meta: { title: '文字识别', icon: '文字识别' },
-        component: () => import('@/views/NestedTools/PageCharacterRecognition')
+        path: 'picture-compression',
+        name: 'PagePictureCompression',
+        meta: { title: '图片压缩', icon: '图片压缩' },
+        component: () => import('@/views/NestedTools/PagePictureCompression')
       }
     ]
   },
   {
     path: '/admin-manage',
     component: Layout,
-    alwaysShow: true,
     name: 'AdminManage',
     redirect: '/admin-manage/role-manage',
     meta: { title: '后台管理', icon: '后台管理' },
