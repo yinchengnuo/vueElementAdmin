@@ -58,7 +58,7 @@ export default Vue => {
               canvas.width = image.width
               canvas.height = image.height
               canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height)
-              const canvasURL = canvas.toDataURL('image/jpeg', (quality || 0.01) * ((quality === 1.01) ? 1 : (await Vue.prototype.$compression(file, 1.01, limit)).scale - 0.3))
+              const canvasURL = canvas.toDataURL('image/jpeg', (quality || 0.01) * ((quality === 1.01) ? 1 : (await Vue.prototype.$compression(file, 1.01, limit)).scale))
               const buffer = atob(canvasURL.split(',')[1])
               let length = buffer.length
               const bufferArray = new Uint8Array(new ArrayBuffer(length))
