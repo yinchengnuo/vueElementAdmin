@@ -5,7 +5,10 @@
     <el-slider v-model="quality" @change="renderImg()" />
     <img v-if="imgInfo.afterSrc" :src="imgInfo.afterSrc" :alt="imgInfo.afterSrc">
     <h6>压缩后：{{ imgInfo.afterKB }}</h6>
-    <el-button v-img="renderImg" type="primary">上传图片</el-button>
+    <div>
+      <el-button v-img="renderImg" type="primary">上传图片</el-button>
+      <el-button type="primary" @click="download(imgInfo.afterSrc)">下载图片</el-button>
+    </div>
   </div>
 </template>
 
@@ -22,14 +25,25 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    renderImg(files) {
+    renderImg(files) { // 获取文件
       if (files) {
         this.file = files[0]
       }
       if (!this.file) return
-      this.$compression(this.file, this.quality / 100, 50).then(res => {
+      this.$compression(this.file, this.quality / 100, 50).then(res => { // 压缩图片
         this.imgInfo = res
       })
+    },
+    download(href) {
+      if (href) {
+        let a = document.createElement('a')
+        a.href = href
+        a.download = `download`
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+        a = null
+      }
     }
   }
 }

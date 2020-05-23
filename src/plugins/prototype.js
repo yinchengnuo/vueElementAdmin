@@ -33,7 +33,7 @@ export default Vue => {
     })
   }
 
-  Vue.prototype.$compression = function(file, quality = 0.5, limit = 100) {
+  Vue.prototype.$compression = function(file, quality = 0.5, limit = 10) {
     if (file[0]) {
       return Promise.all(Array.from(file).map(e => Vue.prototype.$compression(e, quality)))
     } else {
@@ -84,5 +84,9 @@ export default Vue => {
         reader.readAsDataURL(file)
       })
     }
+  }
+
+  Vue.prototype.$download = function(url) {
+    console.log(url)
   }
 }
