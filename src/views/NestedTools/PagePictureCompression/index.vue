@@ -7,7 +7,7 @@
     <h6>压缩后：{{ imgInfo.afterKB }}</h6>
     <div>
       <el-button v-img="renderImg" type="primary">上传图片</el-button>
-      <el-button type="primary" @click="download(imgInfo.afterSrc)">下载图片</el-button>
+      <el-button type="primary" @click="$download(imgInfo.afterSrc)">下载图片</el-button>
     </div>
   </div>
 </template>
@@ -33,17 +33,6 @@ export default {
       this.$compression(this.file, this.quality / 100, 50).then(res => { // 压缩图片
         this.imgInfo = res
       })
-    },
-    download(href) {
-      if (href) {
-        let a = document.createElement('a')
-        a.href = href
-        a.download = `download`
-        document.body.appendChild(a)
-        a.click()
-        a.remove()
-        a = null
-      }
     }
   }
 }
