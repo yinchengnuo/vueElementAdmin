@@ -1,10 +1,10 @@
 <template>
   <div class="PagePictureCompression">
     <img v-if="imgInfo.beforeSrc" :src="imgInfo.beforeSrc" :alt="imgInfo.beforeSrc">
-    <h6>压缩前：{{ imgInfo.beforeKB }}</h6>
+    <h6 v-if="imgInfo.beforeKB">压缩前：{{ imgInfo.beforeKB }}KB</h6>
     <el-slider v-model="quality" :min="1" :max="99" @change="renderImg()" />
     <img v-if="imgInfo.afterSrc" :src="imgInfo.afterSrc" :alt="imgInfo.afterSrc">
-    <h6>压缩后：{{ imgInfo.afterKB }}</h6>
+    <h6 v-if="imgInfo.afterKB">压缩后：{{ imgInfo.afterKB }}KB</h6>
     <div>
       <el-button v-img="renderImg" type="primary">上传图片</el-button>
       <el-button type="primary" @click="$download(imgInfo.afterSrc)">下载图片</el-button>
@@ -12,7 +12,7 @@
     <div v-if="detalList.length">
       <el-tag type="success">期望压缩结果：{{ size }}KB</el-tag>
       <el-tag type="success">实际压缩结果：{{ detalList[detalList.length - 1].kb }}KB</el-tag>
-      <el-tag type="success">总计耗费时长：{{ detalList[detalList.length - 1].kb }}ms</el-tag>
+      <el-tag type="success">总计耗费时长：{{ time }}ms</el-tag>
     </div>
     <el-table v-if="detalList.length" :data="detalList" border stripe>
       <el-table-column label="质量" prop="quality" align="center" />
@@ -29,7 +29,7 @@ export default {
   props: {},
   data() {
     return {
-      quality: 30,
+      quality: 50,
       imgInfo: {},
       detalList: [],
       size: 0,
@@ -40,6 +40,8 @@ export default {
   mounted() {},
   methods: {
     renderImg(files) { // 获取文件
+      // console.log(files[0])
+      // this.$comp(files[0], 0.999999).then(res => console.log(res.file))
       if (files) {
         this.file = files[0]
       }
@@ -47,11 +49,11 @@ export default {
       this._loading = this.$loading()
       const start = Date.now()
       this.size = Number((this.file.size * (this.quality / 100) / 1024).toFixed(2))
-      this.$compression(this.file, this.size).then(res => { // 压缩图片
+      this.$compression(this.file, this.size, 6).then(res => { // 压缩图片
         this.imgInfo = res
         this.detalList = res.detail
         this._loading.close()
-        this.time = Date.now - start
+        this.time = Date.now() - start
       })
     }
   }

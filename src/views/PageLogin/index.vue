@@ -67,7 +67,8 @@ export default {
   mounted() {
     this.$refs.username.focus()
     this.redirect = this.$route.query.redirect
-    if (this.redirect === '/tools/express-query') {
+    const whiteList = ['/tools/express-query', '/tools/picture-compression']
+    if (whiteList.includes(this.redirect)) {
       this.handleLogin()
     }
   },
