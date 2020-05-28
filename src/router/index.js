@@ -115,6 +115,12 @@ export const asyncRoutes = [ // 异步加载路由
         name: 'PageDynamicCache',
         meta: { title: '动态缓存', icon: '动态缓存' },
         component: () => import('@/views/NestedExample/PageDynamicCache')
+      },
+      {
+        path: 'multiple-dialog',
+        name: 'PageMultipleDialog',
+        meta: { title: '多对话框', icon: '多对话框' },
+        component: () => import('@/views/NestedExample/PageMultipleDialog')
       }
     ]
   },
