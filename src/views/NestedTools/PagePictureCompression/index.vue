@@ -40,8 +40,6 @@ export default {
   mounted() {},
   methods: {
     renderImg(files) { // 获取文件
-      // console.log(files[0])
-      // this.$comp(files[0], 0.999999).then(res => console.log(res.file))
       if (files) {
         this.file = files[0]
       }

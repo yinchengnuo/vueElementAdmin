@@ -5,7 +5,6 @@ const mutations = {
     state.push(payload)
   },
   UNREAD_MESSAGE_NUM_CHANGE: (state, payload) => {
-    if (!payload.index && !payload.num) return
     state[payload.index].num = payload.num
   }
 }

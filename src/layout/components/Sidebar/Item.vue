@@ -54,7 +54,7 @@ export default {
       this.$store.commit('unreadMessage/INIT_ADD', {
         num: 0,
         title: this.title,
-        name: this.item.name
+        name: this.item.name || this.item.children[0].name
       })
     }
   }
