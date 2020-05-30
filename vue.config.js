@@ -37,8 +37,8 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    config.plugins.delete('preload')
-    config.plugins.delete('prefetch')
+    // config.plugins.delete('preload')
+    // config.plugins.delete('prefetch')
     
     config.module
       .rule('svg')

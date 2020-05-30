@@ -93,14 +93,22 @@ export default Vue => {
   }
 
   Vue.prototype.$download = function(href) {
-    if (href) {
-      let a = document.createElement('a')
-      a.href = href
-      a.download = 'download'
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      a = null
-    }
+    let a = document.createElement('a')
+    a.href = href
+    a.download = 'download'
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    a = null
+  }
+
+  Vue.prototype.$copy = function(text) {
+    let input = document.createElement('input')
+    input.setAttribute('value', text)
+    document.body.appendChild(input)
+    input.select()
+    document.execCommand('copy')
+    input.remove()
+    input = null
   }
 }
