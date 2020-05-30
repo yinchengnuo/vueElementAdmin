@@ -121,6 +121,12 @@ export const asyncRoutes = [ // 异步加载路由
         name: 'PageMultipleDialog',
         meta: { title: '多对话框', icon: '多对话框' },
         component: () => import('@/views/NestedExample/PageMultipleDialog')
+      },
+      {
+        path: 'live-streaming',
+        name: 'PageLiveStreaming',
+        meta: { title: '直播拉流', icon: '直播拉流' },
+        component: () => import('@/views/NestedExample/PageLiveStreaming')
       }
     ]
   },
