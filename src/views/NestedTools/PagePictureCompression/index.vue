@@ -7,7 +7,7 @@
     <h6 v-if="imgInfo.afterKB">压缩后：{{ imgInfo.afterKB }}KB</h6>
     <div>
       <el-button v-img="renderImg" type="primary">上传图片</el-button>
-      <el-button type="primary" @click="$download()">下载图片</el-button>
+      <el-button type="primary" @click="$download(imgInfo.afterSrc)">下载图片</el-button>
     </div>
     <div v-if="detalList.length">
       <el-tag type="success">期望压缩结果：{{ size }}KB</el-tag>

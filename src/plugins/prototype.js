@@ -49,6 +49,8 @@ export default Vue => {
               const canvas = document.createElement('canvas') // 创建 canvas 元素
               canvas.width = image.width
               canvas.height = image.height
+              canvas.getContext('2d').fillStyle = '#fff'
+              canvas.getContext('2d').fillRect(0, 0, canvas.width, canvas.height)
               canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height) // 绘制 canvas
               let canvasURL, miniFile
               let L = true
