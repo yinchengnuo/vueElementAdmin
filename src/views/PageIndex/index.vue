@@ -19,11 +19,15 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+
 import config1 from './config1'
 import config2 from './config2'
 import config3 from './config3'
 export default {
   name: 'PageIndex',
+  components: { Swiper, SwiperSlide },
+  directives: { swiper: directive },
   data() {
     return {
       PC: document.body.offsetWidth > 1280,

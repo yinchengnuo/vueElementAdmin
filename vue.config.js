@@ -29,6 +29,12 @@ module.exports = {
     }
   },
   configureWebpack: {
+    externals: {
+      'vue': 'Vue',
+      'vue-router': 'VueRouter',
+      'vuex': 'Vuex',
+      'echarts': 'echarts'
+    },
     name: title,
     resolve: {
       alias: {
@@ -37,8 +43,8 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    // config.plugins.delete('preload')
-    // config.plugins.delete('prefetch')
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
     
     config.module
       .rule('svg')

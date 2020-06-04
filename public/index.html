@@ -6,35 +6,24 @@
     <meta name="renderer" content="webkit" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/video.js/7.8.3/video-js.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/5.4.1/css/swiper.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= webpackConfig.name %></title>
-    <style>
-      html::-webkit-scrollbar {
-        width: 10px;
-        height: 1px;
-      }
-
-      html::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        background: #535353;
-      }
-
-      html::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-        background: #ededed;
-      }
-    </style>
   </head>
 
   <body>
-    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
-    <script src="https://cdn.bootcss.com/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
-    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
-    <script src="https://yinchengnuo.com/static/js/china.js"></script>
-    <script src="https://unpkg.com/rough-viz@1.0.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.1.0/vuex.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js"></script>
+    <script src="https://unpkg.com/@jiaminghi/data-view/dist/datav.min.vue.js"></script>
     <div id="app"></div>
+    <script async src="https://cdn.bootcdn.net/ajax/libs/video.js/7.8.3/video.min.js"></script>
+    <script async src="https://cdn.bootcdn.net/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
+    <script async src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js"></script>
+    <script async src="https://yinchengnuo.com/static/js/china.js"></script>
+    <script async src="https://unpkg.com/rough-viz@1.0.5"></script>
   </body>
 </html>
