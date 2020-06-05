@@ -7,7 +7,7 @@
     </swiper>
     <dv-border-box-11 ref="border" title="数据大屏">
       <template v-if="PC">
-        <h1 style="color: #FFFFFF; margin-top: 36vh; text-align: center;">开发中...</h1>
+        <dv-loading />
       </template>
       <template v-else>
         <dv-flyline-chart-enhanced :config="config1" style="100%; height: calc((100vw - 36px) * 0.8);" />
@@ -21,9 +21,9 @@
 <script>
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 
-import config1 from './config1'
-import config2 from './config2'
-import config3 from './config3'
+import config1 from './configs/config1'
+import config2 from './configs/config2'
+import config3 from './configs/config3'
 export default {
   name: 'PageIndex',
   components: { Swiper, SwiperSlide },
