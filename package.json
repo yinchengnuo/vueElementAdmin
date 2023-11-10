@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@jiaminghi/data-view": "^2.8.4",
-    "axios": "0.18.1",
+    "axios": "1.6.0",
     "clipboard": "2.0.4",
     "codemirror": "5.45.0",
     "core-js": "^2.6.11",
